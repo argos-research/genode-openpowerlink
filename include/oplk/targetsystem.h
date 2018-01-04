@@ -136,9 +136,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif (defined (_WIN32) || defined (__MINGW32__))
 #define TARGET_SYSTEM   _WIN32_                             // WIN32 definition
 #define DEV_SYSTEM      _DEV_WIN32_MINGW_
-#else /* (defined (_WIN32) || defined (__MINGW32__)) */     // unsupported
-#error 'ERROR: TARGET_SYSTEM / DEV_SYSTEM not found!'
-#endif
+//#else /* (defined (_WIN32) || defined (__MINGW32__)) */     // unsupported
+//#error 'ERROR: TARGET_SYSTEM / DEV_SYSTEM not found!'
+//#endif
+
+//New defs
+#define TARGET_SYSTEM   _LINUX_
+#define DEV_SYSTEM      _DEV_LINUX_
 
 #define OPLK_DEPRECATED      __attribute__((deprecated))
 
