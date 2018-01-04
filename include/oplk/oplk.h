@@ -48,7 +48,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <oplk/obdal.h>
 #include <oplk/cfm.h>
 #include <oplk/event.h>
-
+#include <oplk/targetdefs/linux.h>
 
 //------------------------------------------------------------------------------
 // const defines
