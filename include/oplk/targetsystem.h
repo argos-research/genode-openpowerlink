@@ -172,6 +172,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //------------------------------------------------------------------------------
 //  TARGET_SYSTEM specific definitions
 //------------------------------------------------------------------------------
+#include <oplk/targetdefs/linux.h>
+
+/*
 #if (TARGET_SYSTEM == _LINUX_)
 
 #include <oplk/targetdefs/linux.h>
@@ -191,7 +194,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #else
 #error "ERROR Target no OS System is not supported"
 #endif
-
+*/
 #elif (TARGET_SYSTEM == _WIN32_)
 
 #if (DEV_SYSTEM == _DEV_WIN32_)
