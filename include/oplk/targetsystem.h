@@ -172,6 +172,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //------------------------------------------------------------------------------
 //  TARGET_SYSTEM specific definitions
 //------------------------------------------------------------------------------
+#define OPLK_DEPRECATED      __attribute__((deprecated))
+
 #include <oplk/targetdefs/linux.h>
 
 /*
