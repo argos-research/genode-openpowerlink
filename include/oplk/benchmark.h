@@ -104,7 +104,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif ((TARGET_SYSTEM == _NO_OS_) && \
        ((DEV_SYSTEM == _DEV_MICROBLAZE_BIG_) || (DEV_SYSTEM == _DEV_MICROBLAZE_LITTLE_)))
 
-#include "xparameters.h"
+//#include "xparameters.h"
 
 #ifdef XPAR_BENCHMARK_PIO_BASEADDR
 #include "xgpio_l.h"
@@ -122,7 +122,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #elif ((TARGET_SYSTEM == _NO_OS_) && (DEV_SYSTEM == _DEV_ARM_XILINX_EABI_))
 
-#include <xparameters.h>
+//#include <xparameters.h>
 
 #ifdef XPAR_HOST_BENCHMARK_PIO_BASEADDR
 #include <xgpio_l.h>
