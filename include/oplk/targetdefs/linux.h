@@ -56,6 +56,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <linux/slab.h>
 #endif /* __KERNEL__ */
 
+#include <sys/stats.h>
+
 #include <oplk/basictypes.h>
 
 //------------------------------------------------------------------------------
