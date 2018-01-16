@@ -35,9 +35,6 @@
 // const defines
 //------------------------------------------------------------------------------
 #define EDRV_MAX_FRAME_SIZE     0x0600
-#ifndef EDRV_MAX_TX_BUFFERS
-#define EDRV_MAX_TX_BUFFERS     256
-#endif
 
 //############################################################################################using namespace Net;
 //------------------------------------------------------------------------------
@@ -92,11 +89,6 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     // save the init data
     edrvInstance_l.initParam = *pEdrvInitParam_p;
 
-    // init and fill buffer allocation instance
-    if ((pBufAlloc_l = bufalloc_init(EDRV_MAX_TX_BUFFERS)) == NULL)
-    {
-        return kErrorNoResource;
-    }
 
     // read MAC address from controller
     printk("%s local MAC = ", __FUNCTION__);
