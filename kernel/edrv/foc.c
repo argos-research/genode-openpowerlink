@@ -71,7 +71,7 @@ This function initializes the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 {
-    int         result;
+    /*int         result;
     int         i;
     tBufData    bufData;
 
@@ -115,7 +115,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
         edrvInstance_l.initParam.aMacAddr[i] = EDRV_REGB_READ((EDRV_REGDW_IDR0 + i));
         printk("%02X ", (UINT)edrvInstance_l.initParam.aMacAddr[i]);
     }
-    printk("\n");
+    printk("\n");*/
 
     return kErrorOk;
 }
@@ -133,14 +133,14 @@ This function shuts down the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_exit(void)
 {
-    if (edrvDriver_l.name != NULL)
+    /*if (edrvDriver_l.name != NULL)
     {
         // clear buffer allocation
         bufalloc_exit(pBufAlloc_l);
         pBufAlloc_l = NULL;
         // clear driver structure
         OPLK_MEMSET(&edrvDriver_l, 0, sizeof(edrvDriver_l));
-    }
+    }*/
 
     return kErrorOk;
 }
