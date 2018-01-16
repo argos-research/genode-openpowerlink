@@ -6,7 +6,7 @@
 #include <kernel/edrv.h>
 
 #include <base/printf.h>
-#include <os/attached_ram_dataspace.h>
+//#include <os/attached_ram_dataspace.h>
 #include <nic/packet_allocator.h>
 #include <net/ethernet.h>
 
