@@ -100,15 +100,6 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     edrvDriver_l.probe        = initOnePciDev,
     edrvDriver_l.remove       = removeOnePciDev,
 
-    // register PCI driver
-    result = pci_register_driver(&edrvDriver_l);
-    if (result != 0)
-    {
-        printk("%s pci_register_driver failed with %d\n", __FUNCTION__, result);
-        ret = kErrorNoResource;
-        goto Exit;
-    }
-
     // init and fill buffer allocation instance
     if ((pBufAlloc_l = bufalloc_init(EDRV_MAX_TX_BUFFERS)) == NULL)
     {
