@@ -5,6 +5,11 @@
 #include <common/bufalloc.h>
 #include <kernel/edrv.h>
 
+#include <base/printf.h>
+#include <os/attached_ram_dataspace.h>
+#include <nic/packet_allocator.h>
+#include <net/ethernet.h>
+
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -71,7 +76,7 @@ This function initializes the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 {
-    /*int         result;
+    int         result;
     int         i;
     tBufData    bufData;
 
@@ -84,38 +89,20 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     // save the init data
     edrvInstance_l.initParam = *pEdrvInitParam_p;
 
-    // clear driver structure
-    // 2008-11-24 d.k. because pci_unregister_driver() doesn't do it correctly;
-    //      one example: kobject_set_name() frees edrvDriver_l.driver.kobj.name,
-    //      but does not set this pointer to NULL.
-    OPLK_MEMSET(&edrvDriver_l, 0, sizeof(edrvDriver_l));
-    edrvDriver_l.name         = DRV_NAME,
-    edrvDriver_l.id_table     = aEdrvPciTbl_l,
-    edrvDriver_l.probe        = initOnePciDev,
-    edrvDriver_l.remove       = removeOnePciDev,
-
     // init and fill buffer allocation instance
     if ((pBufAlloc_l = bufalloc_init(EDRV_MAX_TX_BUFFERS)) == NULL)
     {
         return kErrorNoResource;
     }
 
-    for (i = 0; i < EDRV_MAX_TX_BUFFERS; i++)
-    {
-        bufData.bufferNumber = i;
-        bufData.pBuffer = edrvInstance_l.pTxBuf + (i * EDRV_MAX_FRAME_SIZE);
-
-        bufalloc_addBuffer(pBufAlloc_l, &bufData);
-    }
-
     // read MAC address from controller
     printk("%s local MAC = ", __FUNCTION__);
     for (i = 0; i < 6; i++)
     {
-        edrvInstance_l.initParam.aMacAddr[i] = EDRV_REGB_READ((EDRV_REGDW_IDR0 + i));
+        edrvInstance_l.initParam.aMacAddr[i] = mac()[i];
         printk("%02X ", (UINT)edrvInstance_l.initParam.aMacAddr[i]);
     }
-    printk("\n");*/
+    printk("\n");
 
     return kErrorOk;
 }
