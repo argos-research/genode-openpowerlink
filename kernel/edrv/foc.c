@@ -5,10 +5,10 @@
 #include <common/bufalloc.h>
 #include <kernel/edrv.h>
 
-#include <base/printf.h>
-//#include <os/attached_ram_dataspace.h>
-#include <nic/packet_allocator.h>
-#include <net/ethernet.h>
+//############################################################################################ #include <base/printf.h>
+//############################################################################################ //#include <os/attached_ram_dataspace.h>
+//############################################################################################ #include <nic/packet_allocator.h>
+//############################################################################################ #include <net/ethernet.h>
 
 
 //============================================================================//
@@ -35,8 +35,11 @@
 // const defines
 //------------------------------------------------------------------------------
 #define EDRV_MAX_FRAME_SIZE     0x0600
+#ifndef EDRV_MAX_TX_BUFFERS
+#define EDRV_MAX_TX_BUFFERS     256
+#endif
 
-using namespace Net;
+//############################################################################################using namespace Net;
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -99,7 +102,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     printk("%s local MAC = ", __FUNCTION__);
     for (i = 0; i < 6; i++)
     {
-        edrvInstance_l.initParam.aMacAddr[i] = Net::mac()[i];
+        edrvInstance_l.initParam.aMacAddr[i] = 0xFF;//############################################################################################Net::mac()[i];
         printk("%02X ", (UINT)edrvInstance_l.initParam.aMacAddr[i]);
     }
     printk("\n");
