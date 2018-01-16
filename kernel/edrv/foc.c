@@ -36,7 +36,7 @@
 //------------------------------------------------------------------------------
 #define EDRV_MAX_FRAME_SIZE     0x0600
 
-
+using namespace Net;
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     printk("%s local MAC = ", __FUNCTION__);
     for (i = 0; i < 6; i++)
     {
-        edrvInstance_l.initParam.aMacAddr[i] = mac()[i];
+        edrvInstance_l.initParam.aMacAddr[i] = Net::mac()[i];
         printk("%02X ", (UINT)edrvInstance_l.initParam.aMacAddr[i]);
     }
     printk("\n");
