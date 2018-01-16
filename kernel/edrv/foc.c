@@ -45,9 +45,6 @@ typedef struct
     tEdrvInitParam      initParam;                          ///< Init parameters
     tEdrvTxBuffer*      pTransmittedTxBufferLastEntry;      ///< Pointer to the last entry of the transmitted TX buffer
     tEdrvTxBuffer*      pTransmittedTxBufferFirstEntry;     ///< Pointer to the first entry of the transmitted Tx buffer
-    pthread_mutex_t     mutex;                              ///< Mutex for locking of critical sections
-    sem_t               syncSem;                            ///< Semaphore for signaling the start of the worker thread
-    pthread_t           hThread;                            ///< Handle of the worker thread
 } tEdrvInstance;
 
 //------------------------------------------------------------------------------
@@ -74,7 +71,6 @@ This function initializes the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 {
-    tOplkError  ret = kErrorOk;
     int         result;
     int         i;
     tBufData    bufData;
@@ -101,8 +97,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     // init and fill buffer allocation instance
     if ((pBufAlloc_l = bufalloc_init(EDRV_MAX_TX_BUFFERS)) == NULL)
     {
-        ret = kErrorNoResource;
-        goto Exit;
+        return kErrorNoResource;
     }
 
     for (i = 0; i < EDRV_MAX_TX_BUFFERS; i++)
@@ -111,14 +106,6 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
         bufData.pBuffer = edrvInstance_l.pTxBuf + (i * EDRV_MAX_FRAME_SIZE);
 
         bufalloc_addBuffer(pBufAlloc_l, &bufData);
-    }
-
-    if (edrvInstance_l.pPciDev == NULL)
-    {
-        printk("%s pPciDev=NULL\n", __FUNCTION__);
-        edrv_exit();
-        ret = kErrorNoResource;
-        goto Exit;
     }
 
     // read MAC address from controller
@@ -130,8 +117,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     }
     printk("\n");
 
-Exit:
-    return ret;
+    return kErrorOk;
 }
 
 //------------------------------------------------------------------------------
@@ -324,7 +310,7 @@ This function sends the Tx buffer.
 //------------------------------------------------------------------------------
 tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
 {
-    tOplkError  ret = kErrorOk;
+    /*tOplkError  ret = kErrorOk;
     UINT        bufferNumber;
     UINT32      temp;
     ULONG       flags;
@@ -383,7 +369,8 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
     spin_unlock_irqrestore(&edrvInstance_l.txSpinlock, flags);
 
 Exit:
-    return ret;
+    return ret;*/
+    return kErrorOk;
 }
 
 
