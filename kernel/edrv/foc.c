@@ -47,8 +47,6 @@ typedef struct
     tEdrvTxBuffer*      pTransmittedTxBufferFirstEntry;     ///< Pointer to the first entry of the transmitted Tx buffer
     pthread_mutex_t     mutex;                              ///< Mutex for locking of critical sections
     sem_t               syncSem;                            ///< Semaphore for signaling the start of the worker thread
-    pcap_t*             pPcap;                              ///< Pointer to the pcap interface instance
-    pcap_t*             pPcapThread;                        ///< Handle of the pcap packet handler thread
     pthread_t           hThread;                            ///< Handle of the worker thread
 } tEdrvInstance;
 
