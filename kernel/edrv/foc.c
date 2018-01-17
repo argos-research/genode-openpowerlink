@@ -5,7 +5,7 @@
 #include <common/bufalloc.h>
 #include <kernel/edrv.h>
 
-#include <base/printf.h>
+//############################################################################################ #include <base/printf.h>
 //############################################################################################ //#include <os/attached_ram_dataspace.h>
 //############################################################################################ #include <nic/packet_allocator.h>
 //############################################################################################ #include <net/ethernet.h>
@@ -76,10 +76,8 @@ This function initializes the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 {
-    int         result;
     int         i;
-    tBufData    bufData;
-
+    
     // Check parameter validity
     ASSERT(pEdrvInitParam_p != NULL);
 
