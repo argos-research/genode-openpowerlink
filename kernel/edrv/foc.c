@@ -10,6 +10,7 @@
 //############################################################################################ #include <nic/packet_allocator.h>
 //############################################################################################ #include <net/ethernet.h>
 
+#include <kernel/edrv/genode_wrapper.h>
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -92,7 +93,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     printk("%s local MAC = ", __FUNCTION__);
     for (i = 0; i < 6; i++)
     {
-        edrvInstance_l.initParam.aMacAddr[i] = 0xFF;//############################################################################################Net::mac()[i];
+        edrvInstance_l.initParam.aMacAddr[i] = GetMacAddress()[i];
         printk("%02X ", (UINT)edrvInstance_l.initParam.aMacAddr[i]);
     }
     printk("\n");
