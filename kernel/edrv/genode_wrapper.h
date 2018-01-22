@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-  void GetMacAddress();
+  int GetMacAddress(int i);
 
 #ifdef __cplusplus
 } //end extern "C"

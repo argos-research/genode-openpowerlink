@@ -93,7 +93,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     printk("%s local MAC = ", __FUNCTION__);
     for (i = 0; i < 6; i++)
     {
-        edrvInstance_l.initParam.aMacAddr[i] = GetMacAddress()[i];
+        edrvInstance_l.initParam.aMacAddr[i] = GetMacAddress(i);
         printk("%02X ", (UINT)edrvInstance_l.initParam.aMacAddr[i]);
     }
     printk("\n");

@@ -2,7 +2,7 @@
 #include "genode_wrapper.h"
 
 extern "C" {
-  UINT[] GetMacAddress() {
+  int GetMacAddress(int i) {
     
   }
 }
