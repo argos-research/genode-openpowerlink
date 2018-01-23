@@ -18,7 +18,7 @@ extern "C" {
 	    mac_address.copy(addr);
   	}
 
-	  void init_Session() {
+	void init_Session() {
 
   	}
 }
