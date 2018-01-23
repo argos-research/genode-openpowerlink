@@ -90,10 +90,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 
 
     // read MAC address from controller
-    for (i = 0; i < 6; i++)
-    {
-        edrvInstance_l.initParam.aMacAddr[i] = GetMacAddress(i);
-    }
+    GetMacAddress(edrvInstance_l.initParam.aMacAddr);
 
     return kErrorOk;
 }
