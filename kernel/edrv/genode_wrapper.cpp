@@ -12,7 +12,6 @@ extern "C" {
 	using namespace Genode;
 	using namespace Nic;
 	using namespace Net;
-	using namespace Session;
 
   	void get_Mac_Address(UINT8 addr[6]) {
 	    Genode::log("Getting MAC Address");
