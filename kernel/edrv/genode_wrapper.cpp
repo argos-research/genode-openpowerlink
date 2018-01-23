@@ -1,6 +1,6 @@
 extern "C" {
 
-	#include "genode_wrapper.h"
+	
 
 	#include <nic_session/nic_session.h>
 
