@@ -77,8 +77,6 @@ This function initializes the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 {
-    int         i;
-    
     // Check parameter validity
     ASSERT(pEdrvInitParam_p != NULL);
 
@@ -90,7 +88,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 
 
     // read MAC address from controller
-    get_Mac_Address(edrvInstance_l.initParam.aMacAddr);
+    //get_Mac_Address(edrvInstance_l.initParam.aMacAddr);
 
     return kErrorOk;
 }
