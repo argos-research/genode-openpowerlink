@@ -12,11 +12,12 @@ extern "C" {
 	using namespace Genode;
 	using namespace Nic;
 	using namespace Net;
+	using namespace Session;
 
   	void get_Mac_Address(UINT8 addr[6]) {
 	    Genode::log("Getting MAC Address");
     	//Get Mac Address from Genode NIC
-    	struct Nic::Session nic;
+    	struct Nic nic;
     	Net::Mac_address mac_address;
 
     	mac_address = nic.mac_address();
