@@ -1,10 +1,18 @@
 #include "genode_wrapper.h"
 
-extern "C" {
-	#include <nic_session/nic_session.h>
+#ifdef __cplusplus
 
-	#include <base/log.h>
+#include <nic_session/nic_session.h>
+#include <base/log.h>
+
+
+extern "C" {
+#endif
 	
+	using namespace Genode;
+	using namespace Nic;
+	using namespace Net;
+
   	void get_Mac_Address(UINT8 addr[6]) {
 	    Genode::log("Getting MAC Address");
     	//Get Mac Address from Genode NIC
@@ -19,4 +27,6 @@ extern "C" {
 	void init_Session() {
 
   	}
-}
+#ifdef __cplusplus
+} //end extern "C"
+#endif
