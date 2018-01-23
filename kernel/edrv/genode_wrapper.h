@@ -2,7 +2,7 @@
 extern "C" {
 #endif
 
-  void  get_Mac_Address(uint8_t addr[6]);
+  void  get_Mac_Address(UINT8 addr[6]);
 
   void init_Session();
 
