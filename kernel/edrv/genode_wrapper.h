@@ -1,5 +1,3 @@
-#include "genode_wrapper.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
