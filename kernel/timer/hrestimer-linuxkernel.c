@@ -47,7 +47,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kernel/hrestimer.h>
 #include <oplk/benchmark.h>
 
-#include <linux/module.h>
+#include <sys/module.h>
 #include <linux/kernel.h>
 #include <linux/hrtimer.h>
 
