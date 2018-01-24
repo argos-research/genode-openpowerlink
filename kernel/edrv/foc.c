@@ -5,7 +5,7 @@
 #include <common/bufalloc.h>
 #include <kernel/edrv.h>
 
-//#include "genode_wrapper.h"
+#include "genode_wrapper.h"
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -83,7 +83,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
 
 
     // read MAC address from controller
-    //get_Mac_Address(edrvInstance_l.initParam.aMacAddr);
+    get_Mac_Address(edrvInstance_l.initParam.aMacAddr);
 
     return kErrorOk;
 }
