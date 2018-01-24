@@ -42,8 +42,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //------------------------------------------------------------------------------
 #include <common/oplkinc.h>
 #include <common/target.h>
+#include <common/ftracedebug.h>
 
-#include <sim-target.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <time.h>
+#include <sys/time.h>
+
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -128,7 +134,38 @@ milliseconds has elapsed.
 //------------------------------------------------------------------------------
 void target_msleep(UINT32 milliSeconds_p)
 {
-    sim_msleep(milliSeconds_p);
+    struct  timeval timeout;
+    fd_set          readFds;
+    int             maxFd;
+    int             selectRetVal;
+    unsigned int    seconds;
+    unsigned int    microSeconds;
+
+    // initialize file descriptor set
+    maxFd = 0 + 1;
+    FD_ZERO(&readFds);
+
+    // Calculate timeout values
+    seconds = milliSeconds_p / 1000;
+    microSeconds = (milliSeconds_p - (seconds * 1000)) * 1000;
+
+    // initialize timeout value
+    timeout.tv_sec = seconds;
+    timeout.tv_usec = microSeconds;
+
+    selectRetVal = select(maxFd, &readFds, NULL, NULL, &timeout);
+    switch (selectRetVal)
+    {
+        case 0:     // select timeout occurred, no packet received
+            break;
+
+        case -1:    // select error occurred
+            break;
+
+        default:    // packet available for receive
+            break;
+    }
+
 }
 
 //------------------------------------------------------------------------------
