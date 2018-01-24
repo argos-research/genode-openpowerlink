@@ -278,7 +278,13 @@ This function returns the current system tick determined by the system timer.
 //------------------------------------------------------------------------------
 UINT32 target_getTickCount(void)
 {
-    return sim_getTickCount();
+    UINT32          ticks;
+    struct timespec curTime;
+
+    clock_gettime(CLOCK_MONOTONIC, &curTime);
+    ticks = (curTime.tv_sec * 1000) + (curTime.tv_nsec / 1000000);
+
+    return ticks;
 }
 
 //------------------------------------------------------------------------------
@@ -312,7 +318,10 @@ The function sets the POWERLINK status/error LED.
 //------------------------------------------------------------------------------
 tOplkError target_setLed(tLedType ledType_p, BOOL fLedOn_p)
 {
-    return sim_setLed(ledType_p, fLedOn_p);
+    UNUSED_PARAMETER(ledType_p);
+    UNUSED_PARAMETER(fLedOn_p);
+
+    return kErrorOk;
 }
 
 //============================================================================//
