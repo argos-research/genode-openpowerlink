@@ -16,12 +16,12 @@ extern "C" {
   	void get_Mac_Address(UINT8 addr[6]) {
 	    Genode::log("Getting MAC Address");
     	//Get Mac Address from Genode NIC
-    	Nic::Session nic_session;
+    	/*Nic::Session nic_session;
     	Net::Mac_address mac_address;
 
     	mac_address = nic.mac_address();
 
-	    mac_address.copy(addr);
+	    mac_address.copy(addr);*/
   	}
 
 	void init_Session() {
