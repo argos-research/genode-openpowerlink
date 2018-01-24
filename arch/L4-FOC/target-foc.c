@@ -190,7 +190,12 @@ tOplkError target_setIpAdrs(const char* ifName_p,
                             UINT32 subnetMask_p,
                             UINT16 mtu_p)
 {
-    return sim_setIpAdrs(ifName_p, ipAddress_p, subnetMask_p, mtu_p);
+    UNUSED_PARAMETER(ifName_p);
+    UNUSED_PARAMETER(ipAddress_p);
+    UNUSED_PARAMETER(subnetMask_p);
+    UNUSED_PARAMETER(mtu_p);
+
+    return kErrorOk;
 }
 
 //------------------------------------------------------------------------------
@@ -208,7 +213,9 @@ The function sets the default gateway of an Ethernet interface.
 //------------------------------------------------------------------------------
 tOplkError target_setDefaultGateway(UINT32 defaultGateway_p)
 {
-    return sim_setDefaultGateway(defaultGateway_p);
+    UNUSED_PARAMETER(defaultGateway_p);
+
+    return kErrorOk;
 }
 
 //------------------------------------------------------------------------------
