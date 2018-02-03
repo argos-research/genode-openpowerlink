@@ -165,7 +165,7 @@ tOplkError hrestimer_init(void)
 {
     tOplkError          ret = kErrorOk;
     UINT                index;
-    struct sched_param  schedParam;
+    //struct sched_param  schedParam;
     tHresTimerInfo*     pTimerInfo;
 
     OPLK_MEMSET(&hresTimerInstance_l, 0, sizeof(hresTimerInstance_l));
@@ -193,7 +193,7 @@ tOplkError hrestimer_init(void)
             return kErrorNoResource;
         }
 
-        schedParam.sched_priority = CONFIG_THREAD_PRIORITY_HIGH;
+        //schedParam.sched_priority = CONFIG_THREAD_PRIORITY_HIGH;
         //if (pthread_setschedparam(pTimerInfo->timerThreadId, SCHED_FIFO, &schedParam) != 0)
         //{
         //    DEBUG_LVL_ERROR_TRACE("%s() Couldn't set thread scheduling parameters!\n", __func__);
