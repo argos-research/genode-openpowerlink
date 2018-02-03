@@ -139,11 +139,11 @@ static inline void timespec_add(const struct timespec* time1_p,
                                 ULONGLONG offset_p,
                                 struct timespec* result_p)
 
-#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
-static inline void timespec_sub(const struct timespec* time1_p,
-                                const struct timespec* time2_p,
-                                struct timespec* result_p)
-#endif
+//#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
+//static inline void timespec_sub(const struct timespec* time1_p,
+//                                const struct timespec* time2_p,
+//                                struct timespec* result_p)
+//#endif
 
 
 //============================================================================//
@@ -601,7 +601,7 @@ The function subtracts two timespec values.
 \param[out]     result_p            Pointer to store the result of the calculation.
 */
 //------------------------------------------------------------------------------
-static inline void timespec_sub(const struct timespec* time1_p,
+/*static inline void timespec_sub(const struct timespec* time1_p,
                                 const struct timespec* time2_p,
                                 struct timespec* result_p)
 {
@@ -615,7 +615,7 @@ static inline void timespec_sub(const struct timespec* time1_p,
         result_p->tv_nsec = 1000000000L + time2_p->tv_nsec - time1_p->tv_nsec;
         result_p->tv_sec = time2_p->tv_sec - time1_p->tv_sec - 1;
     }
-}
+}*/
 #endif
 
 /// \}
