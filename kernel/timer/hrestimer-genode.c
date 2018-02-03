@@ -109,11 +109,11 @@ typedef struct
     sem_t               syncSem;            ///< Thread synchronization semaphore
     BOOL                fTerminate;         ///< Thread termination flag
     BOOL                fContinue;          ///< Flag determines if timer will be restarted continuously
-#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
-    /* additional variables for latency debugging */
-    LONG                maxLatency;         ///< Minimum measured timer latency
-    LONG                minLatency;         ///< Maximum measured timer latency
-#endif
+//#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
+//    /* additional variables for latency debugging */
+//    LONG                maxLatency;         ///< Minimum measured timer latency
+//    LONG                minLatency;         ///< Maximum measured timer latency
+//#endif
 } tHresTimerInfo;
 
 /**
@@ -137,7 +137,7 @@ static tHresTimerInstance    hresTimerInstance_l;
 static void* timerThread(void* pArgument_p);
 static inline void timespec_add(const struct timespec* time1_p,
                                 ULONGLONG offset_p,
-                                struct timespec* result_p)
+                                struct timespec* result_p);
 
 //#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
 //static inline void timespec_sub(const struct timespec* time1_p,
