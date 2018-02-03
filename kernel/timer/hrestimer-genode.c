@@ -503,7 +503,8 @@ static void* timerThread(void* pArgument_p)
             do
             {
                 /* sleep until timeout */
-                iRet = clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &timeout, NULL);
+//                iRet = clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &timeout, NULL);
+                iRet = nanosleep(&timeout, NULL);
                 if (iRet < 0)
                 {
                     DEBUG_LVL_ERROR_TRACE("%s(): Error in clock_nanosleep!\n",
