@@ -194,13 +194,13 @@ tOplkError hrestimer_init(void)
         }
 
         schedParam.sched_priority = CONFIG_THREAD_PRIORITY_HIGH;
-        if (pthread_setschedparam(pTimerInfo->timerThreadId, SCHED_FIFO, &schedParam) != 0)
-        {
-            DEBUG_LVL_ERROR_TRACE("%s() Couldn't set thread scheduling parameters!\n", __func__);
-            sem_destroy(&pTimerInfo->syncSem);
-            pthread_cancel(pTimerInfo->timerThreadId);
-            return kErrorNoResource;
-        }
+        //if (pthread_setschedparam(pTimerInfo->timerThreadId, SCHED_FIFO, &schedParam) != 0)
+        //{
+        //    DEBUG_LVL_ERROR_TRACE("%s() Couldn't set thread scheduling parameters!\n", __func__);
+        //    sem_destroy(&pTimerInfo->syncSem);
+        //    pthread_cancel(pTimerInfo->timerThreadId);
+        //    return kErrorNoResource;
+        //}
 
 #if (defined(__GLIBC__) && (__GLIBC__ >= 2) && (__GLIBC_MINOR__ >= 12))
         pthread_setname_np(pTimerInfo->timerThreadId, "oplk-hrtimer");
