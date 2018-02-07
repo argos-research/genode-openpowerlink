@@ -136,7 +136,7 @@ work correctly.
 //------------------------------------------------------------------------------
 int system_init(void)
 {
-    struct sched_param  schedParam;
+    //struct sched_param  schedParam;
     struct sigaction    new_action;
 
     /* adjust process priority */
@@ -146,13 +146,13 @@ int system_init(void)
               __func__,
               strerror(errno));
     }
-    schedParam.sched_priority = MAIN_THREAD_PRIORITY;
+    /*schedParam.sched_priority = MAIN_THREAD_PRIORITY;
     if (pthread_setschedparam(pthread_self(), SCHED_RR, &schedParam) != 0)
     {
         TRACE("%s() couldn't set thread scheduling parameters! %d\n",
               __func__,
               schedParam.sched_priority);
-    }
+    }*/
 
     // Register termination handler for signals with termination semantics
     new_action.sa_handler = handleTermSignal;
