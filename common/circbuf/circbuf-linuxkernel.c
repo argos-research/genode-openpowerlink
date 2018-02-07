@@ -50,7 +50,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 //#include <linux/slab.h>
 //#include <linux/sched.h>
-#include <linux/wait.h>
+#include <sys/wait.h>
 #include <linux/spinlock.h>
 #include <linux/kthread.h>
 
