@@ -45,7 +45,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <oplk/oplk.h>
 #include <oplk/debugstr.h>
-#include <eventlog/eventlog.h>
+#include <eventlog.h>
 
 #include <stddef.h>
 #include <stdio.h>
