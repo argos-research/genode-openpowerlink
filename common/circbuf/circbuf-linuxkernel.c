@@ -48,7 +48,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "circbuf-arch.h"
 
-#include <linux/slab.h>
+//#include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/wait.h>
 #include <linux/spinlock.h>
