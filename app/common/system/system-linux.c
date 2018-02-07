@@ -336,12 +336,12 @@ void system_startFirmwareManagerThread(tFirmwareManagerThreadCb pfnFwmThreadCb_p
     }
 
     schedParam.sched_priority = 0;
-    if (pthread_setschedparam(thread, SCHED_IDLE, &schedParam) != 0)
+/*    if (pthread_setschedparam(thread, SCHED_IDLE, &schedParam) != 0)
     {
         TRACE("%s() couldn't set thread scheduling parameters! %d\n",
               __func__,
               schedParam.sched_priority);
-    }
+    }*/
 
 #if (defined(__GLIBC__) && (__GLIBC__ >= 2) && (__GLIBC_MINOR__ >= 12))
     pthread_setname_np(thread, "oplkdemo-fwm");
