@@ -320,7 +320,7 @@ void system_startFirmwareManagerThread(tFirmwareManagerThreadCb pfnFwmThreadCb_p
 {
     int ret;
     pthread_t thread;
-    struct sched_param  schedParam;
+//    struct sched_param  schedParam;
 
     fwmThreadInstance_l.fTerminate = FALSE;
     fwmThreadInstance_l.pfnFwmCb = pfnFwmThreadCb_p;
