@@ -99,7 +99,7 @@ The function checks the console for a keystroke.
 //------------------------------------------------------------------------------
 int console_kbhit(void)
 {
-    struct termios  oldt;
+    /*struct termios  oldt;
     struct termios  newt;
     int             oldf;
     int             newf;
@@ -130,7 +130,7 @@ int console_kbhit(void)
     {
         ungetc(ch, stdin);
         return 1;
-    }
+    }*/
 
     return 0;
 }

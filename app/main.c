@@ -384,7 +384,7 @@ static void loopMain(void)
     // wait for key hit
     while (!fExit)
     {
-        if (console_kbhit())
+        /*if (console_kbhit())
         {
             cKey = (char)console_getch();
 
@@ -415,7 +415,7 @@ static void loopMain(void)
                 default:
                     break;
             }
-        }
+        }*/
 
         if (system_getTermSignalState() == TRUE)
         {
