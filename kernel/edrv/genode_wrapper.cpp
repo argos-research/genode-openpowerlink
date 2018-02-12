@@ -24,7 +24,7 @@ extern "C" {
 		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
 		                                        Nic::Packet_allocator(env()->heap());
 
-		*_nic = 0;
+		&_nic = 0;
 		try {
 			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
 			                                          1536,
