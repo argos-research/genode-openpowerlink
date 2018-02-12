@@ -288,8 +288,6 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
     // Check parameter validity
     ASSERT(pBuffer_p != NULL);
 
-    bufferNumber = pBuffer_p->txBufferNumber.value;
-
     if (pBuffer_p->pBuffer == NULL)
     {
         ret = kErrorEdrvBufNotExisting;
