@@ -4,8 +4,6 @@
 extern "C" {
 #endif
 
-	Nic::Connection  *_nic;       /* nic-session */
-
   	void  get_Mac_Address(UINT8 addr[6]);
 
   	int init_Session();
