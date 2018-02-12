@@ -80,7 +80,7 @@ extern "C" {
 		/* Submit packet */
 		nic()->tx()->submit_packet(packet);
 		/* check for acknowledgements */
-		_tx_ack();
+		_tx_ack(false);
     }
     
 #ifdef __cplusplus

@@ -284,7 +284,6 @@ This function sends the Tx buffer.
 tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
 {
     tOplkError  ret = kErrorOk;
-    UINT        bufferNumber;
 
     // Check parameter validity
     ASSERT(pBuffer_p != NULL);
