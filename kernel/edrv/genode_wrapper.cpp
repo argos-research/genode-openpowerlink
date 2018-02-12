@@ -17,6 +17,8 @@ extern "C" {
 
 	Nic::Connection  *_nic;       /* nic-session */
 
+  	Nic::Connection  *nic() { return _nic; };
+
 	int init_Session() {
 	    Genode::log("Opem NIC Session");
 		/* Initialize nic-session */
@@ -26,14 +28,14 @@ extern "C" {
 		Nic::Connection *nic = 0;
 		try {
 			nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
-			                                          nbs->tx_buf_size,
-			                                          nbs->rx_buf_size);
+			                                          1536,
+			                                          1536);
 		} catch (Parent::Service_denied) {
 			destroy(env()->heap(), tx_block_alloc);
 			return 1;
 		}
 
-		retrun 0;
+		return 0;
   	}
 
   	void get_Mac_Address(UINT8 addr[6]) {
