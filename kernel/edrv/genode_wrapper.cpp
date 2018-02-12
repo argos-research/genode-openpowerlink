@@ -44,7 +44,7 @@ extern "C" {
     	Nic::Mac_address _mac_address = nic()->mac_address();
 
     	for(int i=0; i<6; ++i)
-			addr[i] = _mac.addr[i];
+			addr[i] = _mac_address.addr[i];
   	}
 
 
