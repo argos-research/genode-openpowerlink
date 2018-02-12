@@ -56,7 +56,7 @@ extern "C" {
   	}
 
 
-  	void sendTXBuffer(char* buffer, size_t size) {
+  	void sendTXBuffer(unsigned char* buffer, size_t size) {
   		Nic::Packet_descriptor packet;
   		bool end = FALSE;
 

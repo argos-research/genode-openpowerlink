@@ -8,7 +8,7 @@ extern "C" {
 
   	int init_Session();
 
-  	void sendTXBuffer(char* buffer, size_t size);
+  	void sendTXBuffer(unsigned char* buffer, size_t size);
 
 	void _tx_ack(bool block = false);
 
