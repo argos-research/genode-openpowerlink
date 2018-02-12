@@ -12,7 +12,6 @@ extern "C" {
 #endif
 	
 	using namespace Genode;
-	using namespace Nic;
 	using namespace Net;
 
 	Nic::Connection  *_nic;       /* nic-session */
