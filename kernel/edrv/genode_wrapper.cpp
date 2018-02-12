@@ -47,6 +47,15 @@ extern "C" {
 			addr[i] = _mac_address.addr[i];
   	}
 
+  	void _tx_ack(bool block = false) {
+		/* check for acknowledgements */
+		while (nic()->tx()->ack_avail() || block) {
+			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
+			nic()->tx()->release_packet(acked_packet);
+			block = false;
+		}
+  	}
+
 
   	void sendTXBuffer(char* buffer, size_t size) {
   		Nic::Packet_descriptor packet;
@@ -74,16 +83,7 @@ extern "C" {
 		/* check for acknowledgements */
 		_tx_ack();
     }
-
-    void _tx_ack(bool block = false) {
-		/* check for acknowledgements */
-		while (nic()->tx()->ack_avail() || block) {
-			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
-			nic()->tx()->release_packet(acked_packet);
-			block = false;
-		}
-
-  	}
+    
 #ifdef __cplusplus
 } //end extern "C"
 #endif
