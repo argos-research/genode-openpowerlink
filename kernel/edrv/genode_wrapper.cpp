@@ -12,10 +12,11 @@ extern "C" {
 #endif
 	
 	using namespace Genode;
-	using namespace Nic;
 	using namespace Net;
 
 	Nic::Connection  *_nic;       /* nic-session */
+
+  	Nic::Connection  *nic() { return _nic; };
 
 	int init_Session() {
 	    Genode::log("Opem NIC Session");
@@ -23,17 +24,16 @@ extern "C" {
 		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
 		                                        Nic::Packet_allocator(env()->heap());
 
-		Nic::Connection *nic = 0;
 		try {
-			nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
-			                                          nbs->tx_buf_size,
-			                                          nbs->rx_buf_size);
+			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
+			                                          1536,
+			                                          1536);
 		} catch (Parent::Service_denied) {
 			destroy(env()->heap(), tx_block_alloc);
 			return 1;
 		}
 
-		retrun 0;
+		return 0;
   	}
 
   	void get_Mac_Address(UINT8 addr[6]) {
@@ -43,11 +43,20 @@ extern "C" {
     	Nic::Mac_address _mac_address = nic()->mac_address();
 
     	for(int i=0; i<6; ++i)
-			addr[i] = _mac.addr[i];
+			addr[i] = _mac_address.addr[i];
+  	}
+
+  	void _tx_ack(bool block) {
+		/* check for acknowledgements */
+		while (nic()->tx()->ack_avail() || block) {
+			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
+			nic()->tx()->release_packet(acked_packet);
+			block = false;
+		}
   	}
 
 
-  	void sendTXBuffer(char* buffer, size_t size) {
+  	void sendTXBuffer(unsigned char* buffer, size_t size) {
   		Nic::Packet_descriptor packet;
   		bool end = FALSE;
 
@@ -71,18 +80,9 @@ extern "C" {
 		/* Submit packet */
 		nic()->tx()->submit_packet(packet);
 		/* check for acknowledgements */
-		_tx_ack();
+		_tx_ack(false);
     }
-
-    void _tx_ack(bool block = false) {
-		/* check for acknowledgements */
-		while (nic()->tx()->ack_avail() || block) {
-			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
-			nic()->tx()->release_packet(acked_packet);
-			block = false;
-		}
-
-  	}
+    
 #ifdef __cplusplus
 } //end extern "C"
 #endif

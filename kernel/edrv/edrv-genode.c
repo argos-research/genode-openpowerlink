@@ -32,6 +32,7 @@
 //------------------------------------------------------------------------------
 #define EDRV_MAX_FRAME_SIZE     1536//0x0600
 
+
 //############################################################################################using namespace Net;
 //------------------------------------------------------------------------------
 // local types
@@ -283,7 +284,6 @@ This function sends the Tx buffer.
 tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
 {
     tOplkError  ret = kErrorOk;
-    UINT        bufferNumber;
 
     // Check parameter validity
     ASSERT(pBuffer_p != NULL);
@@ -296,19 +296,6 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
         goto Exit;
     }
 
-    if ((bufferNumber >= EDRV_MAX_TX_BUFFERS) ||
-        (edrvInstance_l.afTxBufUsed[bufferNumber] == FALSE))
-    {
-        ret = kErrorEdrvBufNotExisting;
-        goto Exit;
-    }
-
-        if (edrvInstance_l.apTxBuffer[edrvInstance_l.tailTxDesc] != NULL)
-    {
-        ret = kErrorEdrvNoFreeTxDesc;
-        goto Exit;
-    }
-
     // pad with zeros if necessary, because controller does not do it
     if (pBuffer_p->txFrameSize < EDRV_MIN_ETH_SIZE)
     {
@@ -318,9 +305,6 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
 
     // #######################################SEND HERE#########################
     sendTXBuffer(pBuffer_p->pBuffer, pBuffer_p->txFrameSize);
-
-    // increment tx queue tail
-    edrvInstance_l.tailTxDesc = (edrvInstance_l.tailTxDesc + 1) & EDRV_TX_DESC_MASK;
 
 Exit:
     return ret;
