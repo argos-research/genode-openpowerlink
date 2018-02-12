@@ -136,43 +136,6 @@ work correctly.
 //------------------------------------------------------------------------------
 int system_init(void)
 {
-    //struct sched_param  schedParam;
-    struct sigaction    new_action;
-
-    /* adjust process priority */
-    if (nice(-20) == -1)         // push nice level in case we have no RTPreempt
-    {
-        TRACE("%s() couldn't set nice value! (%s)\n",
-              __func__,
-              strerror(errno));
-    }
-    /*schedParam.sched_priority = MAIN_THREAD_PRIORITY;
-    if (pthread_setschedparam(pthread_self(), SCHED_RR, &schedParam) != 0)
-    {
-        TRACE("%s() couldn't set thread scheduling parameters! %d\n",
-              __func__,
-              schedParam.sched_priority);
-    }*/
-
-    // Register termination handler for signals with termination semantics
-    new_action.sa_handler = handleTermSignal;
-    sigemptyset(&new_action.sa_mask);
-    new_action.sa_flags = 0;
-
-    sigaction(SIGINT,  &new_action, NULL);      // Sent via CTRL-C
-    sigaction(SIGTERM, &new_action, NULL);      // Generic signal used to cause program termination.
-    sigaction(SIGQUIT, &new_action, NULL);      // Terminate because of abnormal condition
-
-#if defined(SET_CPU_AFFINITY)
-    {
-        /* binds all openPOWERLINK threads to the second CPU core */
-        cpu_set_t   affinity;
-
-        CPU_ZERO(&affinity);
-        CPU_SET(1, &affinity);
-        sched_setaffinity(0, sizeof(cpu_set_t), &affinity);
-    }
-#endif
 
     return 0;
 }

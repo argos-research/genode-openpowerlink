@@ -66,7 +66,7 @@ int console_getch(void)
     struct termios  newt;
     int             ch;
 
-    // Save old attributes
+   /* // Save old attributes
     tcgetattr(STDIN_FILENO, &oldt);
 
     // Calculate and set new attributes
@@ -80,7 +80,7 @@ int console_getch(void)
     ch = getchar();
 
     // Restore old attributes
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);*/
 
     return ch;
 }

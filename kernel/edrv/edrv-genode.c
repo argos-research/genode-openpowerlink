@@ -30,7 +30,7 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define EDRV_MAX_FRAME_SIZE     0x0600
+#define EDRV_MAX_FRAME_SIZE     1536//0x0600
 
 //############################################################################################using namespace Net;
 //------------------------------------------------------------------------------
@@ -81,6 +81,10 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     // save the init data
     edrvInstance_l.initParam = *pEdrvInitParam_p;
 
+
+    int retInit = init_Session();
+    if(retInit != 0)
+        return kErrorEdrvInit;
 
     // read MAC address from controller
     get_Mac_Address(edrvInstance_l.initParam.aMacAddr);
@@ -278,6 +282,48 @@ This function sends the Tx buffer.
 //------------------------------------------------------------------------------
 tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
 {
+    tOplkError  ret = kErrorOk;
+    UINT        bufferNumber;
+
+    // Check parameter validity
+    ASSERT(pBuffer_p != NULL);
+
+    bufferNumber = pBuffer_p->txBufferNumber.value;
+
+    if (pBuffer_p->pBuffer == NULL)
+    {
+        ret = kErrorEdrvBufNotExisting;
+        goto Exit;
+    }
+
+    if ((bufferNumber >= EDRV_MAX_TX_BUFFERS) ||
+        (edrvInstance_l.afTxBufUsed[bufferNumber] == FALSE))
+    {
+        ret = kErrorEdrvBufNotExisting;
+        goto Exit;
+    }
+
+        if (edrvInstance_l.apTxBuffer[edrvInstance_l.tailTxDesc] != NULL)
+    {
+        ret = kErrorEdrvNoFreeTxDesc;
+        goto Exit;
+    }
+
+    // pad with zeros if necessary, because controller does not do it
+    if (pBuffer_p->txFrameSize < EDRV_MIN_ETH_SIZE)
+    {
+        OPLK_MEMSET(pBuffer_p->pBuffer + pBuffer_p->txFrameSize, 0, EDRV_MIN_ETH_SIZE - pBuffer_p->txFrameSize);
+        pBuffer_p->txFrameSize = EDRV_MIN_ETH_SIZE;
+    }
+
+    // #######################################SEND HERE#########################
+    sendTXBuffer(pBuffer_p->pBuffer, pBuffer_p->txFrameSize);
+
+    // increment tx queue tail
+    edrvInstance_l.tailTxDesc = (edrvInstance_l.tailTxDesc + 1) & EDRV_TX_DESC_MASK;
+
+Exit:
+    return ret;
     /*tOplkError  ret = kErrorOk;
     UINT        bufferNumber;
     UINT32      temp;
@@ -338,7 +384,6 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
 
 Exit:
     return ret;*/
-    return kErrorOk;
 }
 
 

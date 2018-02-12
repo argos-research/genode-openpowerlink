@@ -2,8 +2,10 @@
 
 #ifdef __cplusplus
 
-#include <nic_session/nic_session.h>
+#include <base/thread.h>
 #include <base/log.h>
+#include <nic/packet_allocator.h>
+#include <nic_session/connection.h>
 
 
 extern "C" {
@@ -13,18 +15,72 @@ extern "C" {
 	using namespace Nic;
 	using namespace Net;
 
-  	void get_Mac_Address(UINT8 addr[6]) {
-	    Genode::log("Getting MAC Address");
-    	//Get Mac Address from Genode NIC
-    	/*Nic::Session nic_session;
-    	Net::Mac_address mac_address;
+	Nic::Connection  *_nic;       /* nic-session */
 
-    	mac_address = nic.mac_address();
+	int init_Session() {
+	    Genode::log("Opem NIC Session");
+		/* Initialize nic-session */
+		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
+		                                        Nic::Packet_allocator(env()->heap());
 
-	    mac_address.copy(addr);*/
+		Nic::Connection *nic = 0;
+		try {
+			nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
+			                                          nbs->tx_buf_size,
+			                                          nbs->rx_buf_size);
+		} catch (Parent::Service_denied) {
+			destroy(env()->heap(), tx_block_alloc);
+			return 1;
+		}
+
+		retrun 0;
   	}
 
-	void init_Session() {
+  	void get_Mac_Address(UINT8 addr[6]) {
+	    Genode::log("Getting MAC Address");
+
+    	//Get Mac Address from Genode NIC
+    	Nic::Mac_address _mac_address = nic()->mac_address();
+
+    	for(int i=0; i<6; ++i)
+			addr[i] = _mac.addr[i];
+  	}
+
+
+  	void sendTXBuffer(char* buffer, size_t size) {
+  		Nic::Packet_descriptor packet;
+  		bool end = FALSE;
+
+  		while (!end) {
+            try {
+                packet = nic()->tx()->alloc_packet(size);
+                end = TRUE;
+            } catch(Nic::Session::Tx::Source::Packet_alloc_failed) {
+                /* packet allocator exhausted, wait for acknowledgements */
+                _tx_ack(true);
+            }
+        }
+
+        char *tx_content = nic()->tx()->packet_content(packet);
+
+		/*
+		 * copy payload into packet's payload
+		 */
+		Genode::memcpy(tx_content, buffer, size);
+
+		/* Submit packet */
+		nic()->tx()->submit_packet(packet);
+		/* check for acknowledgements */
+		_tx_ack();
+    }
+
+    void _tx_ack(bool block = false) {
+		/* check for acknowledgements */
+		while (nic()->tx()->ack_avail() || block) {
+			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
+			nic()->tx()->release_packet(acked_packet);
+			block = false;
+		}
 
   	}
 #ifdef __cplusplus
