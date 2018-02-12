@@ -24,7 +24,6 @@ extern "C" {
 		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
 		                                        Nic::Packet_allocator(env()->heap());
 
-		&_nic = 0;
 		try {
 			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
 			                                          1536,
@@ -47,7 +46,7 @@ extern "C" {
 			addr[i] = _mac_address.addr[i];
   	}
 
-  	void _tx_ack(bool block = false) {
+  	void _tx_ack(bool block) {
 		/* check for acknowledgements */
 		while (nic()->tx()->ack_avail() || block) {
 			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
