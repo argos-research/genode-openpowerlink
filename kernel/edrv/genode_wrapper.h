@@ -1,5 +1,7 @@
 #include <oplk/basictypes.h>
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -10,7 +12,7 @@ extern "C" {
 
   	void sendTXBuffer(unsigned char* buffer, size_t size);
 
-	void _tx_ack(bool block);
+	void _tx_ack(boolean block);
 
 #ifdef __cplusplus
 } //end extern "C"
