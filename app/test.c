@@ -20,6 +20,11 @@
 
 static const UINT8  aMacAddr_l[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
+static tOplkError initPowerlink(UINT32 cycleLen_p,
+                                const char* devName_p,
+                                const UINT8* macAddr_p,
+                                UINT32 nodeId_p);
+
 int main()
 {
 	tOplkError  ret = kErrorOk;
@@ -89,7 +94,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     initParam.pfnCbEvent = processEvents;
 
 #if defined(CONFIG_KERNELSTACK_DIRECTLINK)
-    initParam.pfnCbSync = processSync;
+//    initParam.pfnCbSync = processSync;
 #else
     initParam.pfnCbSync = NULL;
 #endif
@@ -98,9 +103,9 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     ret = obdcreate_initObd(&initParam.obdInitParam);
     if (ret != kErrorOk)
     {
-        printConsole("obdcreate_initObd() failed with \"%s\" (0x%04x)\n",
-                debugstr_getRetValStr(ret),
-                ret);
+        printConsole("obdcreate_initObd() failed with \"%s\" (0x%04x)\n");//,
+//                debugstr_getRetValStr(ret),
+//                ret);
         return ret;
     }
 
@@ -108,18 +113,18 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     ret = oplk_initialize();
     if (ret != kErrorOk)
     {
-        printConsole("oplk_initialize() failed with \"%s\" (0x%04x)\n",
-                debugstr_getRetValStr(ret),
-                ret);
+        printConsole("oplk_initialize() failed with \"%s\" (0x%04x)\n");//,
+//                debugstr_getRetValStr(ret),
+//                ret);
         return ret;
     }
 
     ret = oplk_create(&initParam);
     if (ret != kErrorOk)
     {
-        printConsole("oplk_create() failed with \"%s\" (0x%04x)\n",
-                debugstr_getRetValStr(ret),
-                ret);
+        printConsole("oplk_create() failed with \"%s\" (0x%04x)\n");//,
+//                debugstr_getRetValStr(ret),
+//                ret);
         return ret;
     }
 
