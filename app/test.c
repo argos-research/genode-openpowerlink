@@ -96,6 +96,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     initParam.pfnCbSync = NULL;
 #endif
 
+    printConsole("Start with obdcreate_initObd");
     // Initialize object dictionary
     ret = obdcreate_initObd(&initParam.obdInitParam);
     if (ret != kErrorOk)
@@ -105,8 +106,10 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
 //                ret);
         return ret;
     }
+    printConsole("Success");
 
     // initialize POWERLINK stack
+    printConsole("Start with oplk_initialize");
     ret = oplk_initialize();
     if (ret != kErrorOk)
     {
@@ -115,7 +118,9 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
 //                ret);
         return ret;
     }
+    printConsole("Success");
 
+    printConsole("Start with oplk_create");
     ret = oplk_create(&initParam);
     if (ret != kErrorOk)
     {
@@ -124,6 +129,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
 //                ret);
         return ret;
     }
+    printConsole("Success");
 
     return kErrorOk;
 }
