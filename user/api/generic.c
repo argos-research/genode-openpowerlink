@@ -213,7 +213,7 @@ tOplkError oplk_create(const tOplkApiInitParam* pInitParam_p)
     if (ret != kErrorOk)
         return ret;
 
-    printConsole("Kernel stack Info is OK - ctrlu_checkKernelStackInfo()");
+//    printConsole("Kernel stack Info is OK - ctrlu_checkKernelStackInfo()");
 
     ret = ctrlu_initStack(pInitParam_p);
     if (ret == kErrorOk)
