@@ -3,9 +3,6 @@
 
 #include <system/system.h>
 #include <obdcreate/obdcreate.h>
-#include <getopt/getopt.h>
-#include <console/console.h>
-#include <eventlog/eventlog.h>
 
 #include <stdio.h>
 #include <limits.h>
