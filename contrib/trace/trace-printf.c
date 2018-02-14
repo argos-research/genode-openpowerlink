@@ -58,13 +58,13 @@ The function prints a debug trace message using standard printf
 //------------------------------------------------------------------------------
 void trace(const char* fmt, ...)
 {
-    va_list argptr;
-    char * output;
+//    va_list argptr;
+//    char * output;
 
-    va_start(argptr, fmt);
-    vsprintf(output, fmt, argptr);
+//    va_start(argptr, fmt);
+//    vsprintf(output, fmt, argptr);
 //    printConsole((char const *)output);
     printConsole("DEBUG MSG!!!!!!!!!!");
 //    vfprintf(stderr, fmt, argptr);
-    va_end(argptr);
+//    va_end(argptr);
 }
