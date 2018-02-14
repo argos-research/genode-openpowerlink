@@ -11,7 +11,7 @@ extern "C" {
 //	using namespace Genode;
 
 	void printConsole(char* text) {
-		Genode::error("text");
+		Genode::log("text");
 	}
 
 #ifdef __cplusplus
