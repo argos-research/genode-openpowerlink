@@ -63,7 +63,8 @@ void trace(const char* fmt, ...)
 
     va_start(argptr, fmt);
     vsprintf(output, fmt, argptr);
-    printConsole((char const *)output);
+//    printConsole((char const *)output);
+    printConsole("DEBUG MSG!!!!!!!!!!");
 //    vfprintf(stderr, fmt, argptr);
     va_end(argptr);
 }
