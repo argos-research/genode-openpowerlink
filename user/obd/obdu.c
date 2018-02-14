@@ -48,6 +48,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <user/obdconf.h>
 #endif
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -264,6 +266,17 @@ tOplkError obdu_init(const tObdInitParam* pInitParam_p,
     tOplkError  ret;
 
     // Make sure that the OD has been initialized before
+if(pInitParam_p == NULL)
+	printConsole("pInitParam_p == NULL");
+if(pInitParam_p->pGenericPart == NULL)
+	printConsole("pInitParam_p->pGenericPart == NULL");
+if(pInitParam_p->pManufacturerPart == NULL)
+	printConsole("pInitParam_p->pManufacturerPart == NULL");
+if(pInitParam_p->pDevicePart == NULL)
+	printConsole("pInitParam_p->pDevicePart == NULL");
+if(pObdAccessCb_p == NULL)
+     printConsole("pObdAccessCb_p == NULL");
+
     if ((pInitParam_p == NULL) ||
         (pInitParam_p->pGenericPart == NULL) ||
         (pInitParam_p->pManufacturerPart == NULL) ||
