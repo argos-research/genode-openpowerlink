@@ -5,6 +5,8 @@
 #include <base/env.h>
 #include <base/log.h>
 
+#include <string>
+
 extern "C" {
 #endif
 
