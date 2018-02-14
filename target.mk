@@ -83,7 +83,6 @@ SRC_COMMON = /user/api/generic.c \
 /kernel/timer/hrestimer-genode.c \
 /kernel/edrv/edrvcyclic.c \
 /kernel/edrv/edrv-genode.c \
-/user/obd/obdconf-fileio.c \
 /user/obd/obdconfcrc-generic.c \
 /common/circbuf/circbuffer.c \
 /common/circbuf/circbuf-noos.c \
