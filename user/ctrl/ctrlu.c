@@ -352,7 +352,7 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
 
     // Check parameter validity
     ASSERT(pInitParam_p != NULL);
-    printConsole("Assert pInitParam_p => Success);
+    printConsole("Assert pInitParam_p => Success");
 
     // reset instance structure
     OPLK_MEMSET(&ctrlInstance_l.initParam, 0, sizeof(tOplkApiInitParam));
