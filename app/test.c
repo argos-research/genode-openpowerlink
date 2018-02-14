@@ -101,7 +101,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     ret = obdcreate_initObd(&initParam.obdInitParam);
     if (ret != kErrorOk)
     {
-        printConsole("obdcreate_initObd() failed with \"%s\" (0x%04x)\n");//,
+        printConsole("obdcreate_initObd() failed\n");//,
 //                debugstr_getRetValStr(ret),
 //                ret);
         return ret;
@@ -113,7 +113,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     ret = oplk_initialize();
     if (ret != kErrorOk)
     {
-        printConsole("oplk_initialize() failed with \"%s\" (0x%04x)\n");//,
+        printConsole("oplk_initialize() failed\n");//,
 //                debugstr_getRetValStr(ret),
 //                ret);
         return ret;
@@ -124,7 +124,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     ret = oplk_create(&initParam);
     if (ret != kErrorOk)
     {
-        printConsole("oplk_create() failed with \"%s\" (0x%04x)\n");//,
+        printConsole("oplk_create() failed\n");//,
 //                debugstr_getRetValStr(ret),
 //                ret);
         return ret;

@@ -78,6 +78,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <user/obdconf.h>
 #endif
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -210,6 +212,8 @@ tOplkError oplk_create(const tOplkApiInitParam* pInitParam_p)
     ret = ctrlu_checkKernelStackInfo();
     if (ret != kErrorOk)
         return ret;
+
+    printConsole("Kernel stack Info is OK - ctrlu_checkKernelStackInfo()");
 
     ret = ctrlu_initStack(pInitParam_p);
     if (ret == kErrorOk)
