@@ -7,14 +7,11 @@
 #include <console/console.h>
 #include <eventlog/eventlog.h>
 
-#if defined(CONFIG_USE_PCAP)
-#include <pcap/pcap-console.h>
-#endif
-
 #include <stdio.h>
 #include <limits.h>
 
 int main()
 {
+	printf("Test");
 	return 0;
 }
