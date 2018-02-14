@@ -11,7 +11,7 @@ extern "C" {
 //	using namespace Genode;
 
 	void printConsole(char* text) {
-		std::string _textStr(text);
+		string _textStr(text);
 		Genode::log(_textStr);
 	}
 
