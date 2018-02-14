@@ -141,6 +141,7 @@ This is the main function of the openPOWERLINK console CN demo application.
 //------------------------------------------------------------------------------
 int main(int argc, char* argv[])
 {
+    printf("Start!!!!!");
     tOplkError  ret = kErrorOk;
     tOptions    opts;
 
