@@ -32,7 +32,7 @@ int main()
 	ret = initPowerlink(CYCLE_LEN,
                         "DevName",
                         aMacAddr_l,
-                        NODEID)
+                        NODEID);
 	printConsole("Finished loading RT Ethernet Stack!\n");
 	printConsole("Return Code was: ");
 	return ret;
