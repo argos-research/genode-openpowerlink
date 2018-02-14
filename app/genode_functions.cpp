@@ -12,7 +12,7 @@ extern "C" {
 
 //	using namespace Genode;
 
-	void printConsole(char* text) {
+	void printConsole(char const * text) {
 		Genode::log(std::string(text));
 	}
 
