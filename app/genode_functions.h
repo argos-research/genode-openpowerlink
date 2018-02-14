@@ -2,7 +2,7 @@
 extern "C" {
 #endif
 
-	void printConsole(char* text);
+	void printConsole(char const * text);
 
 
 #ifdef __cplusplus
