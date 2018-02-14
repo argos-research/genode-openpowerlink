@@ -40,6 +40,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include <stdarg.h>
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -57,8 +59,11 @@ The function prints a debug trace message using standard printf
 void trace(const char* fmt, ...)
 {
     va_list argptr;
+    char * output;
 
     va_start(argptr, fmt);
-    vfprintf(stderr, fmt, argptr);
+    vsprintf(output, fmt, argptr);
+    printConsole((char const *)output);
+//    vfprintf(stderr, fmt, argptr);
     va_end(argptr);
 }

@@ -85,6 +85,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stddef.h>
 #include <limits.h>
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -350,6 +352,7 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
 
     // Check parameter validity
     ASSERT(pInitParam_p != NULL);
+    printConsole("Assert pInitParam_p => Success);
 
     // reset instance structure
     OPLK_MEMSET(&ctrlInstance_l.initParam, 0, sizeof(tOplkApiInitParam));
@@ -360,6 +363,7 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
     // check event callback function pointer
     if (ctrlInstance_l.initParam.pfnCbEvent == NULL)
     {   // application must always have an event callback function
+	printConsole("Error: no event callback set => ctrlInstance_l.initParam.pfnCbEvent");
         ret = kErrorApiInvalidParam;
         goto Exit;
     }
