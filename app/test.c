@@ -27,7 +27,7 @@ int main()
 	tOplkError  ret = kErrorOk;
 	printConsole("Start loading RT Ethernet Stack...\n");
 	ret = initPowerlink(CYCLE_LEN,
-                        "DevName",
+                        "\0",
                         aMacAddr_l,
                         NODEID);
 	printConsole("Finished loading RT Ethernet Stack!\n");
