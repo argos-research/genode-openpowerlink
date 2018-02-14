@@ -213,8 +213,8 @@ static tOplkError processStateChangeEvent(const tEventNmtStateChange* pNmtStateC
         case kNmtCsBasicEthernet:           // no break;
 
         default:
-            printConsole("Stack entered state: %s\n",
-                   debugstr_getNmtStateStr(pNmtStateChange_p->newNmtState));
+            printConsole("Stack entered state:");
+            printConsole(debugstr_getNmtStateStr(pNmtStateChange_p->newNmtState));
             break;
     }
 
