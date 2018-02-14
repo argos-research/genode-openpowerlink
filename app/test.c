@@ -10,8 +10,10 @@
 #include <stdio.h>
 #include <limits.h>
 
+#include "genode_functions.h"
+
 int main()
 {
-	printf("Test");
+	printConsole("Test");
 	return 0;
 }
