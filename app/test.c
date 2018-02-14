@@ -1,9 +1,7 @@
-#include <iostream>
-
-using namespace std;
+//#include <base/env.h>
+//#include <base/printf.h>
 
 int main()
 {
-	cout << "Test output " << endl;
 	return 0;
 }
