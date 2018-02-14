@@ -50,6 +50,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdio.h>
 
+#include <genode_functions.h>
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -193,7 +194,7 @@ static tOplkError processStateChangeEvent(const tEventNmtStateChange* pNmtStateC
             // NMT state machine was shut down,
             ret = kErrorShutdown;
 
-            printf("Stack received kNmtGsOff!\n");
+            printConsole("Stack received kNmtGsOff!\n");
 
             // signal that stack is off
             *pfGsOff_l = TRUE;
@@ -212,7 +213,7 @@ static tOplkError processStateChangeEvent(const tEventNmtStateChange* pNmtStateC
         case kNmtCsBasicEthernet:           // no break;
 
         default:
-            printf("Stack entered state: %s\n",
+            printConsole("Stack entered state: %s\n",
                    debugstr_getNmtStateStr(pNmtStateChange_p->newNmtState));
             break;
     }
@@ -279,13 +280,14 @@ static tOplkError processPdoChangeEvent(const tOplkApiEventPdoChange* pPdoChange
                                    &varLen);
         if (ret != kErrorOk)
         {
-            eventlog_printMessage(kEventlogLevelError,
+            /*eventlog_printMessage(kEventlogLevelError,
                                   kEventlogCategoryObjectDictionary,
                                   "Reading 0x%X/%d failed with %s(0x%X)",
                                   pPdoChange_p->mappParamIndex,
                                   subIndex,
                                   debugstr_getRetValStr(ret),
-                                  ret);
+                                  ret);*/
+            printConsole("Reading failed in event.c file -> processPdoChangeEvent");
             continue;
         }
         eventlog_printPdoMap(pPdoChange_p->mappParamIndex, subIndex, mappObject);

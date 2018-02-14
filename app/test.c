@@ -8,6 +8,7 @@
 #include <limits.h>
 
 #include "genode_functions.h"
+#include "event.h"
 
 #define CYCLE_LEN           50000
 #define NODEID              1
@@ -88,7 +89,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     initParam.fSyncOnPrcNode          = FALSE;
 
     // set callback functions
-//    initParam.pfnCbEvent = processEvents;
+    initParam.pfnCbEvent = processEvents;
 
 #if defined(CONFIG_KERNELSTACK_DIRECTLINK)
 //    initParam.pfnCbSync = processSync;
