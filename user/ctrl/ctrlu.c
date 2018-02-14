@@ -360,6 +360,8 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
                 pInitParam_p,
                 min(sizeof(tOplkApiInitParam), (size_t)pInitParam_p->sizeOfInitParam));
 
+    printConsole("Memset OK");
+
     // check event callback function pointer
     if (ctrlInstance_l.initParam.pfnCbEvent == NULL)
     {   // application must always have an event callback function
@@ -368,9 +370,16 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
         goto Exit;
     }
 
+    printConsole("EventCallback OK");
+    printConsole("Checking initObd");
+
     ret = initObd(&ctrlInstance_l.initParam);
-    if (ret != kErrorOk)
+    if (ret != kErrorOk) {
         goto Exit;
+    }
+
+    printConsole("Success - initObd");
+
 
 #if (CONFIG_OBD_USE_STORE_RESTORE != FALSE)
     // Initialize target-specific obdconf module
