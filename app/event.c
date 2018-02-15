@@ -136,6 +136,8 @@ tOplkError processEvents(tOplkApiEventType eventType_p,
 {
     tOplkError  ret = kErrorOk;
 
+    printConsole("New event in event.c file\n");
+
     switch (eventType_p)
     {
         case kOplkApiEventNmtStateChange:
