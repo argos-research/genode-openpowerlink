@@ -34,8 +34,6 @@ int main()
 	printConsole("Finished loading RT Ethernet Stack!\n");
 	printConsole("Return Code was: ");
 
-	processSync();
-
 	return ret;
 }
 
