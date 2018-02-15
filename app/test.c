@@ -100,6 +100,8 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     printConsole("Start with obdcreate_initObd");
     // Initialize object dictionary
     ret = obdcreate_initObd(&initParam.obdInitParam);
+    if(initParam->pGenericPart==NULL)
+	printConsole("pInitParam_p->pGenericPart == NULL after Init");
     if (ret != kErrorOk)
     {
         printConsole("obdcreate_initObd() failed\n");//,
