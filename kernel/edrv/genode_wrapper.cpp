@@ -8,8 +8,7 @@
 #include <nic_session/connection.h>
 
 
-#include <nic/stat.h>
-#include <net/ethernet.h>
+PACKET_SIZE 	1536;
 
 extern "C" {
 #endif
