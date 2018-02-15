@@ -258,22 +258,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // creation of data in ROM memory
 #define OBD_CREATE_ROM_DATA
-#include <obdcreate/obdcreate.h>
+#include "objdict.h"
 #undef OBD_CREATE_ROM_DATA
 
 // creation of data in RAM memory
 #define OBD_CREATE_RAM_DATA
-#include <obdcreate/obdcreate.h>
+#include "objdict.h"
 #undef OBD_CREATE_RAM_DATA
 
 // creation of subindex tables in ROM and RAM
 #define OBD_CREATE_SUBINDEX_TAB
-#include <obdcreate/obdcreate.h>
+#include "objdict.h"
 #undef OBD_CREATE_SUBINDEX_TAB
 
 // creation of index tables for generic, manufacturer and device part
 #define OBD_CREATE_INDEX_TAB
-#include <obdcreate/obdcreate.h>
+#include "objdict.h"
 #undef OBD_CREATE_INDEX_TAB
 
 #endif
@@ -309,7 +309,7 @@ tOplkError obdcreate_initObd(tObdInitParam* pInitParam_p)
         #define OBD_CREATE_INIT_FUNCTION
         {
             // inserts code to init pointer to index tables
-            #include <obdcreate/obdcreate.h>
+            #include "objdict.h"
         }
         #undef OBD_CREATE_INIT_FUNCTION
 
@@ -323,7 +323,7 @@ tOplkError obdcreate_initObd(tObdInitParam* pInitParam_p)
     #define OBD_CREATE_INIT_SUBINDEX
     {
         // inserts code to copy subindex tables
-        #include <obdcreate/obdcreate.h>
+        #include "objdict.h"
     }
     #undef OBD_CREATE_INIT_SUBINDEX
 
