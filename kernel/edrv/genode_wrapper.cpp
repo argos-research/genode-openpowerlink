@@ -8,6 +8,9 @@
 #include <nic_session/connection.h>
 
 
+#include <nic/stat.h>
+#include <net/ethernet.h>
+
 extern "C" {
 #endif
 	
@@ -24,12 +27,12 @@ extern "C" {
 		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
 		                                        Nic::Packet_allocator(env()->heap());
 
-		BUF_SIZE    = Nic::Session::QUEUE_SIZE * PACKET_SIZE
+		int buf_size    = Nic::Session::QUEUE_SIZE * PACKET_SIZE;
 
 		try {
 			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
-			                                          BUF_SIZE,
-			                                          BUF_SIZE);
+			                                          buf_size,
+			                                          buf_size);
 		} catch (Parent::Service_denied) {
 			destroy(env()->heap(), tx_block_alloc);
 			return 1;
