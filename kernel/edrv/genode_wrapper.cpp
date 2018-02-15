@@ -19,15 +19,17 @@ extern "C" {
   	Nic::Connection  *nic() { return _nic; };
 
 	int init_Session() {
-	    Genode::log("Opem NIC Session");
+	    Genode::log("Open NIC Session");
 		/* Initialize nic-session */
 		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
 		                                        Nic::Packet_allocator(env()->heap());
 
+		BUF_SIZE    = Nic::Session::QUEUE_SIZE * PACKET_SIZE
+
 		try {
 			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
-			                                          1536,
-			                                          1536);
+			                                          BUF_SIZE,
+			                                          BUF_SIZE);
 		} catch (Parent::Service_denied) {
 			destroy(env()->heap(), tx_block_alloc);
 			return 1;
