@@ -2,6 +2,8 @@
 
 #include <stdbool.h>
 
+#include "edrv-struct.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
