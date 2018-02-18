@@ -1,6 +1,7 @@
+#define IGNR_MIN_MAX TRUE
+
 #include <kernel/edrv.h>
 
-#define IGNR_MIN_MAX TRUE
 
 typedef struct
 {
