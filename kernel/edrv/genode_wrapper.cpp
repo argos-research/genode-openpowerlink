@@ -102,7 +102,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			char                  *rx_content = nic->rx()->packet_content(rx_packet);
 			//u16_t                  len        = rx_packet.size();
 
-			Genode::log(rx_content);
+			Genode::log((char const *)rx_content);
 			/* We allocate a pbuf chain of pbufs from the pool. */
 	//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
 
