@@ -38,6 +38,8 @@ int main()
 	ret = initApp();
 	printConsole("Finished loading App!\n");
 
+	loopMain();
+
 	printConsole("Return Code was: ");
 
 	return ret;
@@ -144,3 +146,99 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     return kErrorOk;
 }
 
+
+
+
+
+
+
+
+
+
+static void loopMain(void)
+{
+    tOplkError  ret;
+    char        cKey = 0;
+    BOOL        fExit = FALSE;
+
+#if !defined(CONFIG_KERNELSTACK_DIRECTLINK)
+
+#if defined(CONFIG_USE_SYNCTHREAD)
+    system_startSyncThread(processSync);
+#endif
+
+#endif
+
+    // start processing
+    ret = oplk_execNmtCommand(kNmtEventSwReset);
+    if (ret != kErrorOk)
+        return;
+
+    printConsole("Start POWERLINK stack... ok\n");
+    printConsole("Digital I/O interface with openPOWERLINK is ready!\n");
+    printConsole("\n-------------------------------\n");
+    printConsole("Press Esc to leave the program\n");
+    printConsole("Press r to reset the node\n");
+    printConsole("Press i to increase the digital input\n");
+    printConsole("Press d to decrease the digital input\n");
+    printConsole("Press p to print the digital outputs\n");
+    printConsole("-------------------------------\n\n");
+
+    setupInputs();
+
+    // wait for key hit
+    while (!fExit)
+    {
+        /*if (console_kbhit())
+        {
+            cKey = (char)console_getch();
+
+            switch (cKey)
+            {
+                case 'r':
+                    ret = oplk_execNmtCommand(kNmtEventSwReset);
+                    if (ret != kErrorOk)
+                        fExit = TRUE;
+                    break;
+
+                case 'i':
+                    increaseInputs();
+                    break;
+
+                case 'd':
+                    decreaseInputs();
+                    break;
+
+                case 'p':
+                    printOutputs();
+                    break;
+
+                case 0x1B:
+                    fExit = TRUE;
+                    break;
+
+                default:
+                    break;
+            }
+        }*/
+
+        if (system_getTermSignalState() == TRUE)
+        {
+            fExit = TRUE;
+            printConsole("Received termination signal, exiting...\n");
+        }
+
+        if (oplk_checkKernelStack() == FALSE)
+        {
+            fExit = TRUE;
+            printConsole("Kernel stack has gone! Exiting...\n");
+        }
+
+#if (defined(CONFIG_USE_SYNCTHREAD) || \
+     defined(CONFIG_KERNELSTACK_DIRECTLINK))
+        system_msleep(100);
+#else
+        processSync();
+#endif
+    }
+}
