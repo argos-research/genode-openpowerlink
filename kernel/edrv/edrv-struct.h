@@ -1,3 +1,7 @@
+#include <common/oplkinc.h>
+#include <common/bufalloc.h>
+#include <kernel/edrv.h>
+
 typedef struct
 {
     tEdrvInitParam      initParam;                          ///< Init parameters
