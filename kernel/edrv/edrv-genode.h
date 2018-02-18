@@ -1,6 +1,10 @@
 //------------------------------------------------------------------------------
 // includes
 //------------------------------------------------------------------------------
+
+#ifndef _INC_edrv_genode_H_
+#define _INC_edrv_genode_H_
+
 #include <common/oplkinc.h>
 #include <common/bufalloc.h>
 #include <kernel/edrv.h>
@@ -29,3 +33,5 @@ tOplkError edrv_changeRxFilter(tEdrvFilter* pFilter_p,
 tOplkError edrv_allocTxBuffer(tEdrvTxBuffer* pBuffer_p);
 tOplkError edrv_freeTxBuffer(tEdrvTxBuffer* pBuffer_p);
 tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p);
+
+#endif  /* #ifndef _INC_edrv_genode_H_ */
