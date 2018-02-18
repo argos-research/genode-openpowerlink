@@ -88,6 +88,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
  * C-interface
  */
 extern "C" {
+#endif
 	static void	process_input(tEdrvInstance* init)
 	{
 		Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
