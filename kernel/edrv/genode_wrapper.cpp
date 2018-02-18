@@ -82,7 +82,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			_tx_ack(false);
 	    }
 
-	    	static void	process_input(tEdrvInstance* init)
+	    	static void	process_input(tEdrvInstance *init)
 		{
 			Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 			Nic::Connection       *nic        = th->nic();
@@ -119,7 +119,7 @@ extern "C" {
 
   	Nic::Connection  *nic() { return _nic; };
 
-	int init_Session(tEdrvInstance* init) {
+	int init_Session(tEdrvInstance *init) {
 	    Genode::log("Open NIC Session");
 		/* Initialize nic-session */
 		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())Nic::Packet_allocator(env()->heap());
