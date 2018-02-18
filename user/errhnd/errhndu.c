@@ -434,12 +434,12 @@ static tOplkError linkMnCnLossPresErrors(tErrHndObjects* pError_p)
     ret = checkErrorObject(OID_DLL_MNCN_LOSSPRES_THRCNT_AU32, &indexEntries);
     if (ret != kErrorOk)
         return kErrorObdIndexNotExist;
-    numObjs = min(numObjs, indexEntries);
+    numObjs = min1(numObjs, indexEntries);
 
     ret = checkErrorObject(OID_DLL_MNCN_LOSSPRES_THRESHOLD_AU32, &indexEntries);
     if (ret != kErrorOk)
         return kErrorObdIndexNotExist;
-    numObjs = min(numObjs, indexEntries);
+    numObjs = min1(numObjs, indexEntries);
 
     varParam.size = sizeof(UINT32);
     varParam.validFlag = kVarValidAll;

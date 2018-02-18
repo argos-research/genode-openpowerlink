@@ -1958,7 +1958,7 @@ static tOplkError processReceivedPres(const tFrameInfo* pFrameInfo_p,
         // (the application will most probably just be interested in the frame-header anyway).
         OPLK_MEMCPY(&presEvent.frameBuf,
                     pFrame,
-                    min(sizeof(presEvent.frameBuf), (size_t)pFrameInfo_p->frameSize));
+                    min1(sizeof(presEvent.frameBuf), (size_t)pFrameInfo_p->frameSize));
 
         event.eventSink = kEventSinkApi;
         event.eventType = kEventTypeReceivedPres;

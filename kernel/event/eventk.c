@@ -322,7 +322,7 @@ tOplkError eventk_postError(tEventSource eventSource_p,
     // create argument
     eventError.eventSource = eventSource_p;
     eventError.oplkError = oplkError_p;
-    argSize_p = (UINT)min((size_t)argSize_p, sizeof(eventError.errorArg));
+    argSize_p = (UINT)min1((size_t)argSize_p, sizeof(eventError.errorArg));
     OPLK_MEMCPY(&eventError.errorArg, pArg_p, argSize_p);
 
     // create event

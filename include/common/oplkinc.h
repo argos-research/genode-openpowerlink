@@ -106,12 +106,12 @@ typedef struct
 #define tabentries(aVar_p)      (sizeof(aVar_p) / sizeof(*(aVar_p)))
 #endif
 
-#ifndef min
-#define min(a, b)               (((a) < (b)) ? (a) : (b))
+#ifndef min1
+#define min1(a, b)               (((a) < (b)) ? (a) : (b))
 #endif
 
-#ifndef max
-#define max(a, b)               (((a) > (b)) ? (a) : (b))
+#ifndef max1
+#define max1(a, b)               (((a) > (b)) ? (a) : (b))
 #endif
 
 /* macro for adding two timespec values */

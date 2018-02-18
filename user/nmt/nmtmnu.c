@@ -635,7 +635,7 @@ tOplkError nmtmnu_sendNmtCommandEx(UINT nodeId_p,
     }
 
     // Clip given size to extended NMT command size
-    dataSize_p = min(dataSize_p, (size_t)(C_DLL_MINSIZE_NMTCMDEXT - C_DLL_MINSIZE_NMTCMD));
+    dataSize_p = min1(dataSize_p, (size_t)(C_DLL_MINSIZE_NMTCMDEXT - C_DLL_MINSIZE_NMTCMD));
 
     // Set flag if it is extended NMT command
     fIsExtNmtCmd = (nmtCommand_p >= NMT_EXT_COMMAND_START && nmtCommand_p <= NMT_EXT_COMMAND_END);
@@ -1599,7 +1599,7 @@ static tOplkError cbNmtRequest(const tFrameInfo* pFrameInfo_p)
     pNmtRequestService = &pFrameInfo_p->frame.pBuffer->data.asnd.payload.nmtRequestService;
     nmtCommand = (tNmtCommand)ami_getUint8Le(&pNmtRequestService->nmtCommandId);
     targetNodeId = ami_getUint8Le(&pNmtRequestService->targetNodeId);
-    commandSize = min(sizeof(pNmtRequestService->aNmtCommandData),
+    commandSize = min1(sizeof(pNmtRequestService->aNmtCommandData),
                       pFrameInfo_p->frameSize - offsetof(tPlkFrame, data.asnd.payload.nmtRequestService.aNmtCommandData));
 
     ret = nmtmnu_requestNmtCommand(targetNodeId,

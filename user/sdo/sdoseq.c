@@ -703,7 +703,7 @@ The function sets the sequence layer timeout.
 tOplkError sdoseq_setTimeout(UINT32 timeout_p)
 {
     // Adopt new SDO sequence layer timeout (truncated to an upper bound)
-    sdoSeqInstance_l.sdoSeqTimeout = min(timeout_p, SDO_SEQU_MAX_TIMEOUT_MS) /
+    sdoSeqInstance_l.sdoSeqTimeout = min1(timeout_p, SDO_SEQU_MAX_TIMEOUT_MS) /
                                          (SDO_SEQ_RETRY_COUNT + 1);
 
     return kErrorOk;

@@ -358,7 +358,7 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
     OPLK_MEMSET(&ctrlInstance_l.initParam, 0, sizeof(tOplkApiInitParam));
     OPLK_MEMCPY(&ctrlInstance_l.initParam,
                 pInitParam_p,
-                min(sizeof(tOplkApiInitParam), (size_t)pInitParam_p->sizeOfInitParam));
+                min1(sizeof(tOplkApiInitParam), (size_t)pInitParam_p->sizeOfInitParam));
 
     printConsole("Memset OK");
 

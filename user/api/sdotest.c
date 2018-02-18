@@ -114,7 +114,7 @@ void oplk_testSdoSetVal(const tOplkApiInitParam* pInitParam_p)
     OPLK_MEMSET(&initParam_l, 0, sizeof(tOplkApiInitParam));
     OPLK_MEMCPY(&initParam_l,
                 pInitParam_p,
-                min(sizeof(tOplkApiInitParam), (size_t)pInitParam_p->sizeOfInitParam));
+                min1(sizeof(tOplkApiInitParam), (size_t)pInitParam_p->sizeOfInitParam));
 }
 
 //------------------------------------------------------------------------------
