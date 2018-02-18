@@ -3,7 +3,6 @@
 //------------------------------------------------------------------------------
 #include <common/oplkinc.h>
 #include <common/bufalloc.h>
-#include <kernel/edrv.h>
 
 #include "genode_wrapper.h"
 
