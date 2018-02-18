@@ -78,7 +78,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     edrvInstance_l.initParam = *pEdrvInitParam_p;
 
 
-    int retInit = init_Session(edrvInstance_l);
+    int retInit = init_Session(&edrvInstance_l);
     if(retInit != 0)
         return kErrorEdrvInit;
 
