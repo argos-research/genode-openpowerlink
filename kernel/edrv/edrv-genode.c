@@ -1,7 +1,11 @@
 //------------------------------------------------------------------------------
 // includes
 //------------------------------------------------------------------------------
-#include "edrv-genode.h"
+#include <common/oplkinc.h>
+#include <common/bufalloc.h>
+#include <kernel/edrv.h>
+
+#include "genode_wrapper.h"
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -38,13 +42,13 @@
 
 This structure describes an instance of the Ethernet driver.
 */
-/*typedef struct
+typedef struct
 {
     tEdrvInitParam      initParam;                          ///< Init parameters
     tEdrvTxBuffer*      pTransmittedTxBufferLastEntry;      ///< Pointer to the last entry of the transmitted TX buffer
     tEdrvTxBuffer*      pTransmittedTxBufferFirstEntry;     ///< Pointer to the first entry of the transmitted Tx buffer
     void*               genodeEthThread;
-} tEdrvInstance;*/
+} tEdrvInstance;
 
 //------------------------------------------------------------------------------
 // local vars
