@@ -95,7 +95,7 @@ extern "C" {
 		Nic::Connection       *nic        = th->nic();
 		Nic::Packet_descriptor rx_packet  = th->rx_packet();
 		char                  *rx_content = nic->rx()->packet_content(rx_packet);
-		u16_t                  len        = rx_packet.size();
+		//u16_t                  len        = rx_packet.size();
 
 		/* We allocate a pbuf chain of pbufs from the pool. */
 //		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
