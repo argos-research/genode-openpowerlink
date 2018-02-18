@@ -10,9 +10,9 @@ extern "C" {
 
   	void  get_Mac_Address(UINT8 addr[6]);
 
-  	int init_Session(tEdrvInstance* init);
+  	int init_Session(tEdrvInstance *init);
 
-  	void sendTXBuffer(tEdrvInstance* init, unsigned char* buffer, size_t size);
+  	void sendTXBuffer(tEdrvInstance *init, unsigned char* buffer, size_t size);
 
 	void _tx_ack(bool block);
 
