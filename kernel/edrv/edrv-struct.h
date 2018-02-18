@@ -1,5 +1,7 @@
 #include <kernel/edrv.h>
 
+#define IGNR_MIN_MAX TRUE
+
 typedef struct
 {
     tEdrvInitParam      initParam;                          ///< Init parameters
