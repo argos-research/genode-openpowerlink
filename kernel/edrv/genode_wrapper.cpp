@@ -171,6 +171,7 @@ extern "C" {
 
 
   	void sendTXBuffer(tEdrvInstance *init, unsigned char* buffer, size_t size) {
+  		Genode::log("NIC sendTXBuffer()");
   		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 
 		th->sendTXBufferWorkerThread(buffer, size);
