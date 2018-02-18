@@ -42,13 +42,12 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 		Nic_receiver_thread(Nic::Connection *nic, tEdrvInstance *init)
 		:
-			Genode::Thread_deprecated<8192>("nic-recv"), _nic(nic),
+			Genode::Thread_deprecated<8192>("nic-recv"), _nic(nic), _init(init),
 			_rx_packet_avail_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_packet_avail),
 			_rx_ready_to_ack_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_read_to_ack)
 		{
 			_nic->rx_channel()->sigh_packet_avail(_rx_packet_avail_dispatcher);
 			_nic->rx_channel()->sigh_ready_to_ack(_rx_ready_to_ack_dispatcher);
-			_init = init;
 		}
 
 		void entry();
