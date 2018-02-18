@@ -24,6 +24,8 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
                                 const UINT8* macAddr_p,
                                 UINT32 nodeId_p);
 
+static void loopMain(void);
+
 int main()
 {
 	tOplkError  ret = kErrorOk;
