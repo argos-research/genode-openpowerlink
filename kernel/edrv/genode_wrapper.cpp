@@ -1,6 +1,7 @@
-#include "genode_wrapper.h"
 
 #ifdef __cplusplus
+
+#include "genode_wrapper.h"
 
 #include <base/thread.h>
 #include <base/log.h>
@@ -134,7 +135,7 @@ extern "C" {
 			return 1;
 		}
 
-		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, init);
+		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, *init);
 
 		init->genodeEthThread = (void*) th;
 
