@@ -81,33 +81,31 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			/* check for acknowledgements */
 			_tx_ack(false);
 	    }
+
+	    	static void	process_input(tEdrvInstance* init)
+		{
+			Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
+			Nic::Connection       *nic        = th->nic();
+			Nic::Packet_descriptor rx_packet  = th->rx_packet();
+			char                  *rx_content = nic->rx()->packet_content(rx_packet);
+			//u16_t                  len        = rx_packet.size();
+
+			/* We allocate a pbuf chain of pbufs from the pool. */
+	//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
+
+				/*
+				 * We iterate over the pbuf chain until we have read the entire
+				 * packet into the pbuf.
+				 */
+	/*			for(struct pbuf *q = p; q != 0; q = q->next) {
+					char *dst = (char*)q->payload;
+					Genode::memcpy(dst, rx_content, q->len);
+					rx_content += q->len;
+				}
+	*/
+			//return p;
+		}
 };
-
-
-
-	static void	process_input(tEdrvInstance* init)
-	{
-		Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
-		Nic::Connection       *nic        = th->nic();
-		Nic::Packet_descriptor rx_packet  = th->rx_packet();
-		char                  *rx_content = nic->rx()->packet_content(rx_packet);
-		//u16_t                  len        = rx_packet.size();
-
-		/* We allocate a pbuf chain of pbufs from the pool. */
-//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
-
-			/*
-			 * We iterate over the pbuf chain until we have read the entire
-			 * packet into the pbuf.
-			 */
-/*			for(struct pbuf *q = p; q != 0; q = q->next) {
-				char *dst = (char*)q->payload;
-				Genode::memcpy(dst, rx_content, q->len);
-				rx_content += q->len;
-			}
-*/
-		//return p;
-	}
 
 /*
  * C-interface
