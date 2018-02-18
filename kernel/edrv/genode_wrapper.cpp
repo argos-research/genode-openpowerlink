@@ -9,59 +9,6 @@
 
 #define PACKET_SIZE 	1536;
 
-extern "C" {
-#endif
-	
-	using namespace Genode;
-	using namespace Net;
-
-	Nic::Connection  *_nic;       /* nic-session */
-
-  	Nic::Connection  *nic() { return _nic; };
-
-	int init_Session(struct tEdrvInstance* init) {
-	    Genode::log("Open NIC Session");
-		/* Initialize nic-session */
-		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())Nic::Packet_allocator(env()->heap());
-
-		int buf_size    = Nic::Session::QUEUE_SIZE * PACKET_SIZE;
-
-		try {
-			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
-			                                          buf_size,
-			                                          buf_size);
-		} catch (Parent::Service_denied) {
-			destroy(env()->heap(), tx_block_alloc);
-			return 1;
-		}
-
-		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, init);
-
-		init->genodeEthThread = (void*) th;
-
-		th->start();
-
-		return 0;
-  	}
-
-  	void get_Mac_Address(UINT8 addr[6]) {
-	    Genode::log("Getting MAC Address");
-
-    	//Get Mac Address from Genode NIC
-    	Nic::Mac_address _mac_address = nic()->mac_address();
-
-    	for(int i=0; i<6; ++i)
-			addr[i] = _mac_address.addr[i];
-  	}
-
-
-  	void sendTXBuffer(struct tEdrvInstance* init, unsigned char* buffer, size_t size) {
-  		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
-
-		Nic::Packet_descriptor tx_packet = th->sendTXBufferWorkerThread(buffer, size);
-    }
-    
-
     /*
  * Thread, that receives packets by the nic-session interface.
  */
@@ -134,19 +81,6 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			/* check for acknowledgements */
 			_tx_ack(false);
 	    }
-
-	    void entry()
-		{
-			while(true)
-			{
-				Genode::Signal sig = _sig_rec.wait_for_signal();
-				int num    = sig.num();
-
-				Genode::Signal_dispatcher_base *dispatcher;
-				dispatcher = dynamic_cast<Genode::Signal_dispatcher_base *>(sig.context());
-				dispatcher->dispatch(num);
-			}
-		}
 };
 
 
@@ -177,9 +111,78 @@ extern "C" {
 */
 		//return p;
 	}
+}
+
+
+extern "C" {
+#endif
+	
+	using namespace Genode;
+	using namespace Net;
+
+	Nic::Connection  *_nic;       /* nic-session */
+
+  	Nic::Connection  *nic() { return _nic; };
+
+	int init_Session(struct tEdrvInstance* init) {
+	    Genode::log("Open NIC Session");
+		/* Initialize nic-session */
+		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())Nic::Packet_allocator(env()->heap());
+
+		int buf_size    = Nic::Session::QUEUE_SIZE * PACKET_SIZE;
+
+		try {
+			_nic = new (env()->heap()) Nic::Connection(tx_block_alloc,
+			                                          buf_size,
+			                                          buf_size);
+		} catch (Parent::Service_denied) {
+			destroy(env()->heap(), tx_block_alloc);
+			return 1;
+		}
+
+		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, init);
+
+		init->genodeEthThread = (void*) th;
+
+		th->start();
+
+		return 0;
+  	}
+
+  	void get_Mac_Address(UINT8 addr[6]) {
+	    Genode::log("Getting MAC Address");
+
+    	//Get Mac Address from Genode NIC
+    	Nic::Mac_address _mac_address = nic()->mac_address();
+
+    	for(int i=0; i<6; ++i)
+			addr[i] = _mac_address.addr[i];
+  	}
+
+
+  	void sendTXBuffer(struct tEdrvInstance* init, unsigned char* buffer, size_t size) {
+  		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
+
+		Nic::Packet_descriptor tx_packet = th->sendTXBufferWorkerThread(buffer, size);
+    }
+    
+
 
 
 
 #ifdef __cplusplus
 } //end extern "C"
 #endif
+
+void Nic_receiver_thread::entry()
+		{
+			while(true)
+			{
+				Genode::Signal sig = _sig_rec.wait_for_signal();
+				int num    = sig.num();
+
+				Genode::Signal_dispatcher_base *dispatcher;
+				dispatcher = dynamic_cast<Genode::Signal_dispatcher_base *>(sig.context());
+				dispatcher->dispatch(num);
+			}
+		}
