@@ -1,7 +1,7 @@
 #include <oplk/basictypes.h>
 #include <kernel/edrv.h>
 
-#include "edrv_genode.c"
+#include "edrv-genode.h"
 
 #include <stdbool.h>
 
