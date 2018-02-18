@@ -2,11 +2,13 @@
 
 #include <stdbool.h>
 
-#include "edrv-struct.h"
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+	#include "edrv-struct.h"
 
   	void  get_Mac_Address(UINT8 addr[6]);
 
