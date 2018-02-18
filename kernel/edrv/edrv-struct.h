@@ -1,5 +1,5 @@
 #define IGNR_MIN_MAX TRUE
-
+#define min TRUE
 #include <kernel/edrv.h>
 
 
