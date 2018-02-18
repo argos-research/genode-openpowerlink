@@ -38,6 +38,16 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 		void _handle_rx_read_to_ack(unsigned) { _handle_rx_packet_avail(0); }
 
+		void _tx_ack(bool block = false)
+		{
+			/* check for acknowledgements */
+			while (nic()->tx()->ack_avail() || block) {
+				Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
+				nic()->tx()->release_packet(acked_packet);
+				block = false;
+			}
+		}
+
 	public:
 
 		Nic_receiver_thread(Nic::Connection *nic, tEdrvInstance *init)
