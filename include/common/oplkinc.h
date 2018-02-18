@@ -106,10 +106,8 @@ typedef struct
 #define tabentries(aVar_p)      (sizeof(aVar_p) / sizeof(*(aVar_p)))
 #endif
 
-#ifndef IGNR_MIN_MAX
-#ifndef min
+#ifndef (min || IGNR_MIN_MAX)
 #define min(a, b)               (((a) < (b)) ? (a) : (b))
-#endif
 #endif
 
 #ifndef max
