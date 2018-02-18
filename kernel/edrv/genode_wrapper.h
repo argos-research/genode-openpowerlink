@@ -8,6 +8,8 @@
 extern "C" {
 #endif
 
+	extern tEdrvInstance edrvInstance_l;
+
   	void  get_Mac_Address(UINT8 addr[6]);
 
   	int init_Session(struct tEdrvInstance* init);
