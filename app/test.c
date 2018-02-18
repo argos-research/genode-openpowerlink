@@ -26,9 +26,14 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
 
 static void loopMain(void);
 
+static BOOL         fGsOff_l;
+
 int main()
 {
 	tOplkError  ret = kErrorOk;
+	
+	initEvents(&fGsOff_l);
+
 	printConsole("Start loading RT Ethernet Stack...\n");
 	ret = initPowerlink(CYCLE_LEN,
                         "\0",
