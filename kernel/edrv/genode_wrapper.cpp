@@ -111,11 +111,6 @@ extern "C" {
 */
 		//return p;
 	}
-}
-
-
-extern "C" {
-#endif
 	
 	using namespace Genode;
 	using namespace Net;
