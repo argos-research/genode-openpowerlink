@@ -7,7 +7,6 @@
 #include <nic/packet_allocator.h>
 #include <nic_session/connection.h>
 
-
 #define PACKET_SIZE 	1536;
 
 extern "C" {
@@ -20,11 +19,10 @@ extern "C" {
 
   	Nic::Connection  *nic() { return _nic; };
 
-	int init_Session() {
+	int init_Session(tEdrvInstance* init) {
 	    Genode::log("Open NIC Session");
 		/* Initialize nic-session */
-		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())
-		                                        Nic::Packet_allocator(env()->heap());
+		Nic::Packet_allocator *tx_block_alloc = new (env()->heap())Nic::Packet_allocator(env()->heap());
 
 		int buf_size    = Nic::Session::QUEUE_SIZE * PACKET_SIZE;
 
@@ -36,6 +34,12 @@ extern "C" {
 			destroy(env()->heap(), tx_block_alloc);
 			return 1;
 		}
+
+		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, init);
+
+		init->genodeEthThread = (void*) th;
+
+		th->start();
 
 		return 0;
   	}
@@ -50,43 +54,132 @@ extern "C" {
 			addr[i] = _mac_address.addr[i];
   	}
 
-  	void _tx_ack(bool block) {
-		/* check for acknowledgements */
-		while (nic()->tx()->ack_avail() || block) {
-			Nic::Packet_descriptor acked_packet = nic()->tx()->get_acked_packet();
-			nic()->tx()->release_packet(acked_packet);
-			block = false;
-		}
-  	}
 
+  	void sendTXBuffer(tEdrvInstance* init, unsigned char* buffer, size_t size) {
+  		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 
-  	void sendTXBuffer(unsigned char* buffer, size_t size) {
-  		Nic::Packet_descriptor packet;
-  		bool end = FALSE;
-
-  		while (!end) {
-            try {
-                packet = nic()->tx()->alloc_packet(size);
-                end = TRUE;
-            } catch(Nic::Session::Tx::Source::Packet_alloc_failed) {
-                /* packet allocator exhausted, wait for acknowledgements */
-                _tx_ack(true);
-            }
-        }
-
-        char *tx_content = nic()->tx()->packet_content(packet);
-
-		/*
-		 * copy payload into packet's payload
-		 */
-		Genode::memcpy(tx_content, buffer, size);
-
-		/* Submit packet */
-		nic()->tx()->submit_packet(packet);
-		/* check for acknowledgements */
-		_tx_ack(false);
+		Nic::Packet_descriptor tx_packet = th->sendTXBufferWorkerThread(buffer, size);
     }
     
+
+    /*
+ * Thread, that receives packets by the nic-session interface.
+ */
+class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
+{
+	private:
+
+		typedef Nic::Packet_descriptor Packet_descriptor;
+
+		Nic::Connection  *_nic;       /* nic-session */
+		Packet_descriptor _rx_packet; /* actual packet received */
+		tEdrvInstance* _init;
+
+		Genode::Signal_receiver  _sig_rec;
+
+		Genode::Signal_dispatcher<Nic_receiver_thread> _rx_packet_avail_dispatcher;
+		Genode::Signal_dispatcher<Nic_receiver_thread> _rx_ready_to_ack_dispatcher;
+
+		void _handle_rx_packet_avail(unsigned)
+		{
+			while (_nic->rx()->packet_avail() && _nic->rx()->ready_to_ack()) {
+				_rx_packet = _nic->rx()->get_packet();
+				process_input(_init);
+				_nic->rx()->acknowledge_packet(_rx_packet);
+			}
+		}
+
+		void _handle_rx_read_to_ack(unsigned) { _handle_rx_packet_avail(0); }
+
+	public:
+
+		Nic_receiver_thread(Nic::Connection *nic, tEdrvInstance* init)
+		:
+			Genode::Thread_deprecated<8192>("nic-recv"), _nic(nic),
+			_rx_packet_avail_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_packet_avail),
+			_rx_ready_to_ack_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_read_to_ack)
+		{
+			_nic->rx_channel()->sigh_packet_avail(_rx_packet_avail_dispatcher);
+			_nic->rx_channel()->sigh_ready_to_ack(_rx_ready_to_ack_dispatcher);
+			_init = init;
+		}
+
+		void entry();
+		Nic::Connection  *nic() { return _nic; };
+		Packet_descriptor rx_packet() { return _rx_packet; };
+
+		void sendTXBufferWorkerThread(unsigned char* buffer, size_t size) {
+	  		Nic::Packet_descriptor packet;
+	  		bool end = FALSE;
+
+	  		while (!end) {
+	            try {
+	                packet = nic()->tx()->alloc_packet(size);
+	                end = TRUE;
+	            } catch(Nic::Session::Tx::Source::Packet_alloc_failed) {
+	                /* packet allocator exhausted, wait for acknowledgements */
+	                _tx_ack(true);
+	            }
+	        }
+
+	        char *tx_content = nic()->tx()->packet_content(packet);
+
+			/*
+			 * copy payload into packet's payload
+			 */
+			Genode::memcpy(tx_content, buffer, size);
+
+			/* Submit packet */
+			nic()->tx()->submit_packet(packet);
+			/* check for acknowledgements */
+			_tx_ack(false);
+	    }
+
+	    void entry()
+		{
+			while(true)
+			{
+				Genode::Signal sig = _sig_rec.wait_for_signal();
+				int num    = sig.num();
+
+				Genode::Signal_dispatcher_base *dispatcher;
+				dispatcher = dynamic_cast<Genode::Signal_dispatcher_base *>(sig.context());
+				dispatcher->dispatch(num);
+			}
+		}
+};
+
+
+/*
+ * C-interface
+ */
+extern "C" {
+	static void	process_input(tEdrvInstance* init)
+	{
+		Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
+		Nic::Connection       *nic        = th->nic();
+		Nic::Packet_descriptor rx_packet  = th->rx_packet();
+		char                  *rx_content = nic->rx()->packet_content(rx_packet);
+		u16_t                  len        = rx_packet.size();
+
+		/* We allocate a pbuf chain of pbufs from the pool. */
+//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
+
+			/*
+			 * We iterate over the pbuf chain until we have read the entire
+			 * packet into the pbuf.
+			 */
+/*			for(struct pbuf *q = p; q != 0; q = q->next) {
+				char *dst = (char*)q->payload;
+				Genode::memcpy(dst, rx_content, q->len);
+				rx_content += q->len;
+			}
+*/
+		//return p;
+	}
+
+
+
 #ifdef __cplusplus
 } //end extern "C"
 #endif

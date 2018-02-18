@@ -47,6 +47,7 @@ typedef struct
     tEdrvInitParam      initParam;                          ///< Init parameters
     tEdrvTxBuffer*      pTransmittedTxBufferLastEntry;      ///< Pointer to the last entry of the transmitted TX buffer
     tEdrvTxBuffer*      pTransmittedTxBufferFirstEntry;     ///< Pointer to the first entry of the transmitted Tx buffer
+    void*               genodeEthThread;
 } tEdrvInstance;
 
 //------------------------------------------------------------------------------
@@ -83,7 +84,7 @@ tOplkError edrv_init(const tEdrvInitParam* pEdrvInitParam_p)
     edrvInstance_l.initParam = *pEdrvInitParam_p;
 
 
-    int retInit = init_Session();
+    int retInit = init_Session(&edrvInstance_l);
     if(retInit != 0)
         return kErrorEdrvInit;
 
@@ -302,70 +303,10 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
     }
 
     // #######################################SEND HERE#########################
-    sendTXBuffer(pBuffer_p->pBuffer, pBuffer_p->txFrameSize);
+    sendTXBuffer(&edrvInstance_l, pBuffer_p->pBuffer, pBuffer_p->txFrameSize);
 
 Exit:
     return ret;
-    /*tOplkError  ret = kErrorOk;
-    UINT        bufferNumber;
-    UINT32      temp;
-    ULONG       flags;
-
-    // Check parameter validity
-    ASSERT(pBuffer_p != NULL);
-
-    bufferNumber = pBuffer_p->txBufferNumber.value;
-
-    if (pBuffer_p->pBuffer == NULL)
-    {
-        ret = kErrorEdrvBufNotExisting;
-        goto Exit;
-    }
-
-    if ((bufferNumber >= EDRV_MAX_TX_BUFFERS) ||
-        (edrvInstance_l.afTxBufUsed[bufferNumber] == FALSE))
-    {
-        ret = kErrorEdrvBufNotExisting;
-        goto Exit;
-    }
-
-    // array of pointers to tx buffers in queue is checked
-    // because all four tx descriptors should be used
-    if (edrvInstance_l.apTxBuffer[edrvInstance_l.tailTxDesc] != NULL)
-    {
-        ret = kErrorEdrvNoFreeTxDesc;
-        goto Exit;
-    }
-
-    EDRV_COUNT_SEND;
-
-    // pad with zeros if necessary, because controller does not do it
-    if (pBuffer_p->txFrameSize < EDRV_MIN_ETH_SIZE)
-    {
-        OPLK_MEMSET(pBuffer_p->pBuffer + pBuffer_p->txFrameSize, 0, EDRV_MIN_ETH_SIZE - pBuffer_p->txFrameSize);
-        pBuffer_p->txFrameSize = EDRV_MIN_ETH_SIZE;
-    }
-
-    spin_lock_irqsave(&edrvInstance_l.txSpinlock, flags);
-
-    // save pointer to buffer structure for TxHandler
-    edrvInstance_l.apTxBuffer[edrvInstance_l.tailTxDesc] = pBuffer_p;
-
-    // set DMA address of buffer
-    EDRV_REGDW_WRITE(EDRV_REGDW_TSAD(edrvInstance_l.tailTxDesc), (edrvInstance_l.pTxBufDma + (bufferNumber * EDRV_MAX_FRAME_SIZE)));
-    temp = EDRV_REGDW_READ(EDRV_REGDW_TSAD(edrvInstance_l.tailTxDesc));
-
-    // start transmission
-    EDRV_REGDW_WRITE(EDRV_REGDW_TSD(edrvInstance_l.tailTxDesc), (EDRV_REGDW_TSD_TXTH_DEF | pBuffer_p->txFrameSize));
-    temp = EDRV_REGDW_READ(EDRV_REGDW_TSD(edrvInstance_l.tailTxDesc));
-
-    // increment tx queue tail
-    edrvInstance_l.tailTxDesc = (edrvInstance_l.tailTxDesc + 1) & EDRV_TX_DESC_MASK;
-
-    spin_unlock_irqrestore(&edrvInstance_l.txSpinlock, flags);
-
-Exit:
-    return ret;*/
 }
 
 
