@@ -20,7 +20,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 		Nic::Connection  *_nic;       /* nic-session */
 		Packet_descriptor _rx_packet; /* actual packet received */
-		tEdrvInstance* _init;
+		tEdrvInstance *_init;
 
 		Genode::Signal_receiver  _sig_rec;
 
@@ -40,7 +40,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 	public:
 
-		Nic_receiver_thread(Nic::Connection *nic, tEdrvInstance* init)
+		Nic_receiver_thread(Nic::Connection *nic, tEdrvInstance *init)
 		:
 			Genode::Thread_deprecated<8192>("nic-recv"), _nic(nic),
 			_rx_packet_avail_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_packet_avail),
@@ -155,7 +155,7 @@ extern "C" {
   	}
 
 
-  	void sendTXBuffer(tEdrvInstance* init, unsigned char* buffer, size_t size) {
+  	void sendTXBuffer(tEdrvInstance *init, unsigned char* buffer, size_t size) {
   		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 
 		th->sendTXBufferWorkerThread(buffer, size);
