@@ -6,7 +6,6 @@
 #include <kernel/edrv.h>
 
 #include "genode_wrapper.h"
-#include "edrv-struct.h"
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
