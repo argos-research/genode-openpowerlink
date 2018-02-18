@@ -1,5 +1,4 @@
 #include <oplk/basictypes.h>
-#include <common/oplkinc.h>
 
 #include <stdbool.h>
 
