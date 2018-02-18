@@ -160,7 +160,7 @@ extern "C" {
   	void sendTXBuffer(tEdrvInstance* init, unsigned char* buffer, size_t size) {
   		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 
-		Nic::Packet_descriptor tx_packet = th->sendTXBufferWorkerThread(buffer, size);
+		th->sendTXBufferWorkerThread(buffer, size);
     }
     
 
