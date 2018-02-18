@@ -50,6 +50,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stddef.h>
 #include <stdio.h>
 
+#include "genode_functions.h"
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -210,7 +212,7 @@ void increaseInputs(void)
     else
         digitalIn_l = digitalIn_l << 1;
 
-    printf("\b \b");
+    //printf("\b \b");
     printInputs();
 }
 
@@ -231,7 +233,7 @@ void decreaseInputs(void)
     else
         digitalIn_l = digitalIn_l >> 1;
 
-    printf("\b \b");
+    //printf("\b \b");
     printInputs();
 }
 
@@ -249,16 +251,16 @@ void printOutputs(void)
 {
     int i;
 
-    printf("\b \b");
-    printf("Digital outputs: ");
+    //printf("\b \b");
+    printConsole("Digital outputs: ");
     for (i = 0; i < 8; i++)
     {
         if (((digitalOut_l >> i) & 1) == 1)
-            printf("*");
+            printConsole("*");
         else
-            printf("-");
+            printConsole("-");
     }
-    printf("\n");
+    printConsole("\n");
 }
 
 //------------------------------------------------------------------------------
@@ -274,15 +276,15 @@ void printInputs(void)
 {
     int i;
 
-    printf("Digital inputs: ");
+    printConsole("Digital inputs: ");
     for (i = 0; i < 8; i++)
     {
         if (((digitalIn_l >> i) & 1) == 1)
-            printf("*");
+            printConsole("*");
         else
-            printf("-");
+            printConsole("-");
     }
-    printf("\n");
+    printConsole("\n");
 }
 
 //============================================================================//
@@ -307,15 +309,8 @@ static tOplkError initProcessImage(void)
     tObdSize    obdSize;
 
     /* Allocate process image */
-    printf("Initializing process image...\n");
-    printf("Size of process image: Input = %lu Output = %lu \n",
-           (ULONG)sizeof(PI_IN),
-           (ULONG)sizeof(PI_OUT));
-    eventlog_printMessage(kEventlogLevelInfo,
-                          kEventlogCategoryGeneric,
-                          "Allocating process image: Input:%lu Output:%lu",
-                          (ULONG)sizeof(PI_IN),
-                          (ULONG)sizeof(PI_OUT));
+    printConsole("Initializing process image...\n");
+    printConsole("Size of process image: Input = XX Output = YY \n");
 
     ret = oplk_allocProcessImage(sizeof(PI_IN), sizeof(PI_OUT));
     if (ret != kErrorOk)
@@ -325,7 +320,7 @@ static tOplkError initProcessImage(void)
     pProcessImageOut_l = (const PI_OUT*)oplk_getProcessImageOut();
 
     /* link process variables used by CN to object dictionary */
-    fprintf(stderr, "Linking process image vars:\n");
+    printConsole("Linking process image vars:\n");
 
     obdSize = sizeof(pProcessImageIn_l->digitalIn);
     varEntries = 1;
@@ -337,10 +332,8 @@ static tOplkError initProcessImage(void)
                                       &varEntries);
     if (ret != kErrorOk)
     {
-        fprintf(stderr,
-                "Linking process vars failed with \"%s\" (0x%04x)\n",
-                debugstr_getRetValStr(ret),
-                ret);
+        printConsole("Linking process vars failed with:");
+        printConsole(debugstr_getRetValStr(ret));
         return ret;
     }
 
@@ -354,14 +347,12 @@ static tOplkError initProcessImage(void)
                                       &varEntries);
     if (ret != kErrorOk)
     {
-        fprintf(stderr,
-                "Linking process vars failed with \"%s\" (0x%04x)\n",
-                debugstr_getRetValStr(ret),
-                ret);
+        printConsole("Linking process vars failed with:");
+        printConsole(debugstr_getRetValStr(ret));
         return ret;
     }
 
-    fprintf(stderr, "Linking process vars... ok\n\n");
+    printConsole("Linking process vars... ok\n\n");
 
     return kErrorOk;
 }

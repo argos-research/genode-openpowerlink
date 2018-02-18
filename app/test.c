@@ -9,6 +9,7 @@
 
 #include "genode_functions.h"
 #include "event.h"
+#include "app.h"
 
 #define CYCLE_LEN           50000
 #define NODEID              1
@@ -32,6 +33,11 @@ int main()
                         aMacAddr_l,
                         NODEID);
 	printConsole("Finished loading RT Ethernet Stack!\n");
+
+	printConsole("Start loading App...\n");
+	ret = initApp();
+	printConsole("Finished loading App!\n");
+
 	printConsole("Return Code was: ");
 
 	return ret;
