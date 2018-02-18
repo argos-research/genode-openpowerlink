@@ -1,7 +1,6 @@
+#include "genode_wrapper.h"
 
 #ifdef __cplusplus
-
-#include "genode_wrapper.h"
 
 #include <base/thread.h>
 #include <base/log.h>
@@ -41,9 +40,9 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 	public:
 
-		Nic_receiver_thread(Nic::Connection *nic)
+		Nic_receiver_thread(Nic::Connection *nic, tEdrvInstance *init)
 		:
-			Genode::Thread_deprecated<8192>("nic-recv"), _nic(nic),
+			Genode::Thread_deprecated<8192>("nic-recv"), _nic(nic), _init(init),
 			_rx_packet_avail_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_packet_avail),
 			_rx_ready_to_ack_dispatcher(_sig_rec, *this, &Nic_receiver_thread::_handle_rx_read_to_ack)
 		{
@@ -135,7 +134,7 @@ extern "C" {
 			return 1;
 		}
 
-		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic);
+		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic(), init);
 
 		init->genodeEthThread = (void*) th;
 
