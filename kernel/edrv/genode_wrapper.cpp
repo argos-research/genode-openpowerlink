@@ -95,12 +95,14 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 	    	static void	process_input(tEdrvInstance *init)
 		{
 			Genode::log("NIC Thread process_input()");
+
 			Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 			Nic::Connection       *nic        = th->nic();
 			Nic::Packet_descriptor rx_packet  = th->rx_packet();
 			char                  *rx_content = nic->rx()->packet_content(rx_packet);
 			//u16_t                  len        = rx_packet.size();
 
+			Genode::log(rx_content);
 			/* We allocate a pbuf chain of pbufs from the pool. */
 	//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
 
