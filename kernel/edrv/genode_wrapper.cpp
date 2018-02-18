@@ -135,7 +135,7 @@ extern "C" {
 			return 1;
 		}
 
-		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, *init);
+		Nic_receiver_thread *th = new (env()->heap())Nic_receiver_thread(nic, &init);
 
 		init->genodeEthThread = (void*) th;
 
