@@ -65,6 +65,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 		Packet_descriptor rx_packet() { return _rx_packet; };
 
 		void sendTXBufferWorkerThread(unsigned char* buffer, size_t size) {
+			Genode::log("NIC Thread sendTXBufferWorkerThread()");
 	  		Nic::Packet_descriptor packet;
 	  		bool end = FALSE;
 
@@ -93,6 +94,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 	    	static void	process_input(tEdrvInstance *init)
 		{
+			Genode::log("NIC Thread process_input()");
 			Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 			Nic::Connection       *nic        = th->nic();
 			Nic::Packet_descriptor rx_packet  = th->rx_packet();
@@ -161,6 +163,8 @@ extern "C" {
 
     	for(int i=0; i<6; ++i)
 			addr[i] = _mac_address.addr[i];
+
+		Genode::log(_mac_address);
   	}
 
 
@@ -180,6 +184,7 @@ extern "C" {
 
 void Nic_receiver_thread::entry()
 		{
+			Genode::log("NIC Thread entry() started");
 			while(true)
 			{
 				Genode::Signal sig = _sig_rec.wait_for_signal();
