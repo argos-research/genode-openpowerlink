@@ -6,6 +6,7 @@
 #include <common/oplkinc.h>
 #include <common/bufalloc.h>
 
+#include <genode_functions.h>
 
 
 //============================================================================//
@@ -126,6 +127,9 @@ This function returns the MAC address of the Ethernet controller
 //------------------------------------------------------------------------------
 const UINT8* edrv_getMacAddr(void)
 {
+    printConsole("Get MAC");
+    printConsole(edrvInstance_l.initParam.aMacAddr);
+    
     return edrvInstance_l.initParam.aMacAddr;
 }
 
@@ -144,6 +148,8 @@ This function sets a multicast entry into the Ethernet controller.
 //------------------------------------------------------------------------------
 tOplkError edrv_setRxMulticastMacAddr(const UINT8* pMacAddr_p)
 {
+    printConsole(pMacAddr_p);
+
     UNUSED_PARAMETER(pMacAddr_p);
 
     return kErrorOk;
