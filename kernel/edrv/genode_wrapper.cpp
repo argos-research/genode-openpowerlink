@@ -117,11 +117,9 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
                     	// Call Rx handler of Data link layer
                     	retReleaseRxBuffer = init->initParam.pfnRxHandler(&rxBuffer);
 
+			Genode::log("Received bits:", rx_packet.size());
+			Genode::log("Content: ", Genode::Hex(rxBuffer.pBuffer));
 			Genode::log("NIC Thread process_input() finished..");
-			char buf[25];
-
-		        //sprintf(buf, "Received %d byte", rx_packet.size());
-			Genode::log("Received bytes:", rx_packet.size());
 		}
 };
 
