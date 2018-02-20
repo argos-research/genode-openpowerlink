@@ -162,22 +162,25 @@ The function implements the synchronous data handler.
 tOplkError processSync(void)
 {
     tOplkError  ret = kErrorOk;
-
+printConsole("A");
     if (oplk_waitSyncEvent(100000) != kErrorOk)
         return ret;
 
+printConsole("B");
+
     ret = oplk_exchangeProcessImageOut();
+printConsole("C");
     if (ret != kErrorOk)
         return ret;
-
+printConsole("D");
     /* read input image - digital outputs */
     digitalOut_l = pProcessImageOut_l->digitalOut;
 
     /* setup output image - digital inputs */
     pProcessImageIn_l->digitalIn = digitalIn_l;
-
+printConsole("E");
     ret = oplk_exchangeProcessImageIn();
-
+printConsole("F");
     return ret;
 }
 

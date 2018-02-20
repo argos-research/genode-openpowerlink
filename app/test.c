@@ -207,9 +207,7 @@ static void loopMain(void)
      defined(CONFIG_KERNELSTACK_DIRECTLINK))
         system_msleep(100);
 #else
-       ret = processSync();
-if (ret != kErrorOk)
-	printConsole("ERR");
+        processSync();
 #endif
     }
 }
