@@ -206,6 +206,7 @@ static void loopMain(void)
 #if (defined(CONFIG_USE_SYNCTHREAD) || \
      defined(CONFIG_KERNELSTACK_DIRECTLINK))
         system_msleep(100);
+printConsole("Sleep 100");
 #else
         processSync();
 #endif
