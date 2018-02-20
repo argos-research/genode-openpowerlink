@@ -94,7 +94,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 	    	static void	process_input(tEdrvInstance *init)
 		{
-			Genode::log("NIC Thread process_input()");
+			//Genode::log("NIC Thread process_input()");
 			tEdrvReleaseRxBuffer    retReleaseRxBuffer;
 			
 			tEdrvRxBuffer           rxBuffer;
@@ -105,7 +105,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			char                  *rx_content = nic->rx()->packet_content(rx_packet);
 			//u16_t                  len        = rx_packet.size();
 
-			rxBuffer.bufferInFrame = kEdrvBufferLastInFrame;
+			rxBuffer.bufferInFrame = kEdrvBufferMiddleInFrame;
 
 		        // Get length of received packet
 		        // size does not contain CRC as RW_REGW_CPLUS_COMMAND_RX_CHKSUM_OFLD_EN is set
@@ -117,9 +117,9 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
                     	// Call Rx handler of Data link layer
                     	retReleaseRxBuffer = init->initParam.pfnRxHandler(&rxBuffer);
 
-			Genode::log("Received bits:", rx_packet.size());
-			Genode::log("Content: ", &rxBuffer.pBuffer);
-			Genode::log("NIC Thread process_input() finished..");
+			//Genode::log("Received bits:", rx_packet.size());
+			//Genode::log("Content: ", &rxBuffer.pBuffer);
+			//Genode::log("NIC Thread process_input() finished..");
 		}
 };
 

@@ -72,6 +72,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kernel/timestamp.h>
 #endif
 
+#include <genode_functions.h>
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -181,6 +182,7 @@ The function implements the callback function to process a received frame.
 //------------------------------------------------------------------------------
 tEdrvReleaseRxBuffer dllkframe_processFrameReceived(tEdrvRxBuffer* pRxBuffer_p)
 {
+printConsole("Called Handler");
     tEdrvReleaseRxBuffer    releaseRxBuffer = kEdrvReleaseRxBufferImmediately;
     tOplkError              ret = kErrorOk;
     tNmtState               nmtState;
