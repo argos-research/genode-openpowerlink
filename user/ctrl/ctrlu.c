@@ -402,6 +402,7 @@ tOplkError ctrlu_initStack(const tOplkApiInitParam* pInitParam_p)
     ret = obdal_init(cbEventUserObdAccess);
     if (ret != kErrorOk)
         goto Exit;
+printConsole("Initializing kernel modules ...\n");
 
     DEBUG_LVL_CTRL_TRACE("Initializing kernel modules ...\n");
     OPLK_MEMCPY(ctrlParam.aMacAddress, ctrlInstance_l.initParam.aMacAddress, 6);
