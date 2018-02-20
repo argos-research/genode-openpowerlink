@@ -108,7 +108,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     initParam.pfnCbEvent = processEvents;
 
 #if defined(CONFIG_KERNELSTACK_DIRECTLINK)
-//    initParam.pfnCbSync = processSync;
+    initParam.pfnCbSync = processSync;
 #else
     initParam.pfnCbSync = NULL;
 #endif
@@ -228,13 +228,6 @@ static void loopMain(void)
                     break;
             }
         }*/
-
-        if (system_getTermSignalState() == TRUE)
-        {
-            fExit = TRUE;
-            printConsole("Received termination signal, exiting...\n");
-        }
-
         if (oplk_checkKernelStack() == FALSE)
         {
             fExit = TRUE;
