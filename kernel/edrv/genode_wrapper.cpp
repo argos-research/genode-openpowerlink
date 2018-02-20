@@ -112,7 +112,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 		        rxBuffer.rxFrameSize = (rx_packet.size()) - EDRV_ETH_CRC_SIZE;
 			
 		        //rxBuffer.pBuffer = *rx_content; 
-			Genode::memcpy(rxBuffer.pBuffer, rx_content, rx_packet.size());
+			//Genode::memcpy(rxBuffer.pBuffer, rx_content, rx_packet.size());
 
                     	// Call Rx handler of Data link layer
                     	retReleaseRxBuffer = init->initParam.pfnRxHandler(&rxBuffer);
