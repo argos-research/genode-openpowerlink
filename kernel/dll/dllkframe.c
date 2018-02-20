@@ -196,6 +196,13 @@ tEdrvReleaseRxBuffer dllkframe_processFrameReceived(tEdrvRxBuffer* pRxBuffer_p)
 
     BENCHMARK_MOD_02_SET(3);
     nmtState = dllkInstance_g.nmtState;
+    if (nmtState == kNmtGsOff)
+        printConsole("1");
+    if (nmtState == kNmtGsInitialising)
+        printConsole("2");
+    if (nmtState == kNmtGsResetApplication)
+        printConsole("3");
+    if (nmtState == kNmtGsResetCommunication)
 printConsole("Called Handler");
     if (nmtState <= kNmtGsResetConfiguration)
         goto Exit;
