@@ -182,7 +182,6 @@ The function implements the callback function to process a received frame.
 //------------------------------------------------------------------------------
 tEdrvReleaseRxBuffer dllkframe_processFrameReceived(tEdrvRxBuffer* pRxBuffer_p)
 {
-printConsole("Called Handler");
     tEdrvReleaseRxBuffer    releaseRxBuffer = kEdrvReleaseRxBufferImmediately;
     tOplkError              ret = kErrorOk;
     tNmtState               nmtState;
@@ -197,11 +196,14 @@ printConsole("Called Handler");
 
     BENCHMARK_MOD_02_SET(3);
     nmtState = dllkInstance_g.nmtState;
+printConsole("Called Handler");
     if (nmtState <= kNmtGsResetConfiguration)
         goto Exit;
+printConsole("Called Handler2");
 
     pFrame = (tPlkFrame*)pRxBuffer_p->pBuffer;
 #if (CONFIG_EDRV_EARLY_RX_INT != FALSE)
+printConsole("Called Handler3a");
     switch (pRxBuffer_p->bufferInFrame)
     {
         case kEdrvBufferFirstInFrame:
@@ -256,6 +258,7 @@ printConsole("Called Handler");
 
     frameInfo.frame.pBuffer = pFrame;
     frameInfo.frameSize = pRxBuffer_p->rxFrameSize;
+printConsole("Called Handler 3b");
 
     if (ami_getUint16Be(&pFrame->etherType) != C_DLL_ETHERTYPE_EPL)
     {   // non-POWERLINK frame
