@@ -128,7 +128,7 @@ This function returns the MAC address of the Ethernet controller
 const UINT8* edrv_getMacAddr(void)
 {
     printConsole("Get MAC");
-    printConsole(edrvInstance_l.initParam.aMacAddr);
+    printConsole((const char *)edrvInstance_l.initParam.aMacAddr);
     
     return edrvInstance_l.initParam.aMacAddr;
 }

@@ -110,8 +110,9 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 		        // Get length of received packet
 		        // size does not contain CRC as RW_REGW_CPLUS_COMMAND_RX_CHKSUM_OFLD_EN is set
 		        rxBuffer.rxFrameSize = (rx_packet.size()) - EDRV_ETH_CRC_SIZE;
-
-		        rxBuffer.pBuffer = *rx_content; 
+			
+		        //rxBuffer.pBuffer = *rx_content; 
+			Genode::memcpy(rxBuffer.pBuffer, rx_content, rx_packet.size());
 
                     	// Call Rx handler of Data link layer
                     	retReleaseRxBuffer = init->initParam.pfnRxHandler(&rxBuffer);
