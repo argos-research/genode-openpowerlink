@@ -114,7 +114,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 		        rxBuffer.pBuffer = *rx_content; 
 
                     	// Call Rx handler of Data link layer
-                    	retReleaseRxBuffer = init.initParam.pfnRxHandler(&rxBuffer);
+                    	retReleaseRxBuffer = init->initParam.pfnRxHandler(&rxBuffer);
 
 			Genode::log("NIC Thread process_input() fnished..");
 		}
