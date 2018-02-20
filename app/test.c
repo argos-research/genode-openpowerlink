@@ -247,6 +247,5 @@ static void loopMain(void)
 #else
         processSync();
 #endif
-        printConsole("Loop");
     }
 }
