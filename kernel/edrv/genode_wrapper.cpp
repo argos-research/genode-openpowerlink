@@ -95,6 +95,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 	    	static void	process_input(tEdrvInstance *init)
 		{
 			Genode::log("NIC Thread process_input()");
+			tEdrvReleaseRxBuffer    retReleaseRxBuffer;
 			
 			tEdrvRxBuffer           rxBuffer;
 
@@ -113,22 +114,9 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 		        rxBuffer.pBuffer = *rx_content; 
 
                     	// Call Rx handler of Data link layer
-                    	retReleaseRxBuffer = edrvInstance_l.initParam.pfnRxHandler(&rxBuffer);
+                    	retReleaseRxBuffer = init.initParam.pfnRxHandler(&rxBuffer);
 
-			/* We allocate a pbuf chain of pbufs from the pool. */
-	//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
-
-				/*
-				 * We iterate over the pbuf chain until we have read the entire
-				 * packet into the pbuf.
-				 */
-	/*			for(struct pbuf *q = p; q != 0; q = q->next) {
-					char *dst = (char*)q->payload;
-					Genode::memcpy(dst, rx_content, q->len);
-					rx_content += q->len;
-				}
-	*/
-			//return p;
+			Genode::log("NIC Thread process_input() fnished..");
 		}
 };
 
