@@ -95,6 +95,8 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 	    	static void	process_input(tEdrvInstance *init)
 		{
 			Genode::log("NIC Thread process_input()");
+			
+			tEdrvRxBuffer           rxBuffer;
 
 			Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 			Nic::Connection       *nic        = th->nic();
@@ -102,7 +104,17 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			char                  *rx_content = nic->rx()->packet_content(rx_packet);
 			//u16_t                  len        = rx_packet.size();
 
-			Genode::log((char const *)rx_content);
+			rxBuffer.bufferInFrame = kEdrvBufferLastInFrame;
+
+		        // Get length of received packet
+		        // size does not contain CRC as RW_REGW_CPLUS_COMMAND_RX_CHKSUM_OFLD_EN is set
+		        rxBuffer.rxFrameSize = (rx_packet.size()) - EDRV_ETH_CRC_SIZE;
+
+		        rxBuffer.pBuffer = *rx_content; 
+
+                    	// Call Rx handler of Data link layer
+                    	retReleaseRxBuffer = edrvInstance_l.initParam.pfnRxHandler(&rxBuffer);
+
 			/* We allocate a pbuf chain of pbufs from the pool. */
 	//		struct pbuf *p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
 
