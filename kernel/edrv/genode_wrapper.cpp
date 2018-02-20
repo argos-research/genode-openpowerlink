@@ -118,7 +118,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
                     	retReleaseRxBuffer = init->initParam.pfnRxHandler(&rxBuffer);
 
 			Genode::log("Received bits:", rx_packet.size());
-			Genode::log("Content: ", Genode::Hex(rxBuffer.pBuffer));
+			Genode::log("Content: ", rxBuffer.pBuffer);
 			Genode::log("NIC Thread process_input() finished..");
 		}
 };
