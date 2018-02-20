@@ -165,7 +165,6 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
 static void loopMain(void)
 {
     tOplkError  ret;
-    char        cKey = 0;
     BOOL        fExit = FALSE;
 
 #if !defined(CONFIG_KERNELSTACK_DIRECTLINK)
@@ -193,41 +192,11 @@ static void loopMain(void)
 
     setupInputs();
 
-    // wait for key hit
+    printConsole("Setup Inputs ... OK");
+
+    // wait for exit
     while (!fExit)
     {
-        /*if (console_kbhit())
-        {
-            cKey = (char)console_getch();
-
-            switch (cKey)
-            {
-                case 'r':
-                    ret = oplk_execNmtCommand(kNmtEventSwReset);
-                    if (ret != kErrorOk)
-                        fExit = TRUE;
-                    break;
-
-                case 'i':
-                    increaseInputs();
-                    break;
-
-                case 'd':
-                    decreaseInputs();
-                    break;
-
-                case 'p':
-                    printOutputs();
-                    break;
-
-                case 0x1B:
-                    fExit = TRUE;
-                    break;
-
-                default:
-                    break;
-            }
-        }*/
         if (oplk_checkKernelStack() == FALSE)
         {
             fExit = TRUE;
