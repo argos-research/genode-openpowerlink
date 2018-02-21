@@ -288,9 +288,9 @@ UINT32 target_getTickCount(void)
     UINT32          ticks;
     struct timespec curTime;
 
-//    clock_gettime(CLOCK_MONOTONIC, &curTime);
-//    ticks = (curTime.tv_sec * 1000) + (curTime.tv_nsec / 1000000);
-    ticks = clock();
+    clock_gettime(CLOCK_MONOTONIC, &curTime);
+    ticks = (curTime.tv_sec * 1000) + (curTime.tv_nsec / 1000000);
+
     return ticks;
 }
 
