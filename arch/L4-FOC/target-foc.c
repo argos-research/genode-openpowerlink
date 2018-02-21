@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <unistd.h>
 #include <fcntl.h>
-v#include <signal.h>
+#include <signal.h>
 #include <time.h>
 #include <sys/time.h>
 
