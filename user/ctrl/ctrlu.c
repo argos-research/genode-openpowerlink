@@ -695,7 +695,8 @@ BOOL ctrlu_checkKernelStack(void)
         diff = timestamp - lastTimestamp;
     else
         diff = UINT_MAX - lastTimestamp + timestamp;
-
+// HERE
+diff = CONFIG_CHECK_HEARTBEAT_PERIOD;
     if (diff < CONFIG_CHECK_HEARTBEAT_PERIOD)
         return TRUE;
 
