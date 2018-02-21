@@ -288,6 +288,7 @@ tOplkError nmtk_process(const tEvent* pEvent_p)
                              __func__,
                              nmtEvent,
                              nmtkStates_l[nmtkInstance_l.stateIndex].nmtState);
+	DEBUG_LVL_NMTK_TRACE((const char*)nmtEvent);
 
         nmtStateChange.newNmtState = nmtkStates_l[nmtkInstance_l.stateIndex].nmtState;
         nmtStateChange.oldNmtState = nmtkStates_l[oldState].nmtState;
