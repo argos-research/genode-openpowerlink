@@ -98,31 +98,31 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (DEBUG_GLB_LVL & DEBUG_LVL_ALWAYS)
 #define DEBUG_LVL_ALWAYS_TRACE(...)     TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_ALWAYS_TRACE(...)
+#define DEBUG_LVL_ALWAYS_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_ERROR)
 #define DEBUG_LVL_ERROR_TRACE(...)      TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_ERROR_TRACE(...)
+#define DEBUG_LVL_ERROR_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_ASSERT)
 #define DEBUG_LVL_ASSERT_TRACE(...)     TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_ASSERT_TRACE(...)
+#define DEBUG_LVL_ASSERT_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_EVENTU)
 #define DEBUG_LVL_EVENTU_TRACE(...)     TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_EVENTU_TRACE(...)
+#define DEBUG_LVL_EVENTU_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_EVENTK)
 #define DEBUG_LVL_EVENTK_TRACE(...)     TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_EVENTK_TRACE(...)
+#define DEBUG_LVL_EVENTK_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_VETH)
@@ -194,7 +194,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (DEBUG_GLB_LVL & DEBUG_LVL_NMTK)
 #define DEBUG_LVL_NMTK_TRACE(...)       TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_NMTK_TRACE(...)
+#define DEBUG_LVL_NMTK_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_OBD)
@@ -206,13 +206,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (DEBUG_GLB_LVL & DEBUG_LVL_DLL)
 #define DEBUG_LVL_DLL_TRACE(...)        TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_DLL_TRACE(...)
+#define DEBUG_LVL_DLL_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 #if (DEBUG_GLB_LVL & DEBUG_LVL_EDRV)
 #define DEBUG_LVL_EDRV_TRACE(...)       TRACE(__VA_ARGS__)
 #else
-#define DEBUG_LVL_EDRV_TRACE(...)
+#define DEBUG_LVL_EDRV_TRACE(...)       TRACE(__VA_ARGS__)
 #endif
 
 //------------------------------------------------------------------------------
