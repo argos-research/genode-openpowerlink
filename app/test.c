@@ -176,9 +176,9 @@ static void loopMain(void)
 #endif
 
     // start processing
-    //ret = oplk_execNmtCommand(kNmtEventSwReset);
-    //if (ret != kErrorOk)
-    //    return;
+    ret = oplk_execNmtCommand(kNmtEventSwReset);
+    if (ret != kErrorOk)
+        return;
 
     printConsole("Start POWERLINK stack... ok\n");
     printConsole("Digital I/O interface with openPOWERLINK is ready!\n");
