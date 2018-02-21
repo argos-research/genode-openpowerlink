@@ -688,10 +688,9 @@ BOOL ctrlu_checkKernelStack(void)
     UINT32          timestamp;
     UINT32          diff;
 
-printConsole("Check Kernel");
     // don't exceed kernel heartbeat frequency
     timestamp = target_getTickCount();
-printConsole("Timer");
+
     if (timestamp >= lastTimestamp)
         diff = timestamp - lastTimestamp;
     else

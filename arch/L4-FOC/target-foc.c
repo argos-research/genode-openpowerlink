@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <unistd.h>
 #include <fcntl.h>
-#include <signal.h>
+v#include <signal.h>
 #include <time.h>
 #include <sys/time.h>
 
@@ -288,9 +288,9 @@ UINT32 target_getTickCount(void)
     UINT32          ticks;
     struct timespec curTime;
 
-    clock_gettime(CLOCK_MONOTONIC, &curTime);
-    ticks = (curTime.tv_sec * 1000) + (curTime.tv_nsec / 1000000);
-
+//    clock_gettime(CLOCK_MONOTONIC, &curTime);
+//    ticks = (curTime.tv_sec * 1000) + (curTime.tv_nsec / 1000000);
+    ticks = clock();
     return ticks;
 }
 
