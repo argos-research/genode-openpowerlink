@@ -51,6 +51,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kernel/ledk.h>
 #endif
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -268,7 +270,7 @@ tOplkError nmtk_process(const tEvent* pEvent_p)
 
         case kEventTypeTimer:
             nmtEvent = (tNmtEvent)((const tTimerEventArg*)pEvent_p->eventArg.pEventArg)->argument.value;
-            break;
+	    break;
 
         default:
             return kErrorNmtInvalidEvent;
@@ -288,6 +290,15 @@ tOplkError nmtk_process(const tEvent* pEvent_p)
                              __func__,
                              nmtEvent,
                              nmtkStates_l[nmtkInstance_l.stateIndex].nmtState);
+    if (nmtState == kNmtGsOff)
+        printConsole("11");
+    if (nmtState == kNmtGsInitialising)
+        printConsole("22");
+    if (nmtState == kNmtGsResetApplication)
+        printConsole("33");
+    if (nmtState == kNmtGsResetCommunication)
+printConsole("44");
+
 
         nmtStateChange.newNmtState = nmtkStates_l[nmtkInstance_l.stateIndex].nmtState;
         nmtStateChange.oldNmtState = nmtkStates_l[oldState].nmtState;
