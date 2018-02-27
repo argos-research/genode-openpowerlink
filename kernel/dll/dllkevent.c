@@ -297,6 +297,7 @@ static tOplkError processNmtStateChange(tNmtState newNmtState_p,
             // will initialize the Error Signaling.
             dllkInstance_g.flag1 = PLK_FRAME_FLAG1_EC;
             dllkInstance_g.nmtState = newNmtState_p;
+	    printConsole("    processNmtStateChange");
             if (oldNmtState_p > kNmtGsResetConfiguration)
                 ret = dllknode_cleanupLocalNode(oldNmtState_p);      // de-initialize DLL and destroy frames
             break;
