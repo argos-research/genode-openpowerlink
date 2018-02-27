@@ -146,6 +146,8 @@ tOplkError dllk_process(const tEvent* pEvent_p)
     tOplkError                  ret = kErrorOk;
     const tEventNmtStateChange* pNmtStateChange;
 
+    printConsole("-> dllkevent received");
+
     switch (pEvent_p->eventType)
     {
         case kEventTypeNmtStateChange:
@@ -153,6 +155,7 @@ tOplkError dllk_process(const tEvent* pEvent_p)
             ret = processNmtStateChange(pNmtStateChange->newNmtState,
                                         pNmtStateChange->oldNmtState,
                                         pNmtStateChange->nmtEvent);
+	    printConsole("   event was: kEventTypeNmtStateChange");
             break;
 
         case kEventTypeNmtEvent:
@@ -208,8 +211,6 @@ tOplkError dllk_process(const tEvent* pEvent_p)
 #endif
             break;
     }
-
-    printConsole("-> dllkevent received");
 
     return ret;
 }
