@@ -302,7 +302,7 @@ tOplkError dllknode_cleanupLocalNode(tNmtState oldNmtState_p)
     // Reset relative time validation flag
     dllkInstance_g.socTime.fRelTimeValid = FALSE;
 
-    printConsole("DLLKNODE reset");
+    DEBUG_LVL_ERROR_TRACE("DLLKNODE reset");
 
     return ret;
 }
