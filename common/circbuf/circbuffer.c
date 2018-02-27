@@ -68,6 +68,8 @@ the main instance can clean up and free the buffer by calling circbuf_free().
 //------------------------------------------------------------------------------
 #include "circbuf-arch.h"
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -305,6 +307,7 @@ tCircBufError circbuf_writeData(tCircBufInstance* pInstance_p,
                                 const void* pData_p,
                                 size_t size_p)
 {
+    printConsole("->Write to Circbuffer");
     UINT32              blockSize;
     UINT32              fullBlockSize;
     UINT32              chunkSize;
