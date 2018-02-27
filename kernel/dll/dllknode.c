@@ -1,4 +1,4 @@
-/**
+y/**
 ********************************************************************************
 \file   dllknode.c
 
@@ -67,6 +67,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kernel/edrvcyclic.h>
 #endif
 
+#include <genode_functions.h>
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -300,6 +301,8 @@ tOplkError dllknode_cleanupLocalNode(tNmtState oldNmtState_p)
 
     // Reset relative time validation flag
     dllkInstance_g.socTime.fRelTimeValid = FALSE;
+
+    printConsole("DLLKNODE reset");
 
     return ret;
 }
