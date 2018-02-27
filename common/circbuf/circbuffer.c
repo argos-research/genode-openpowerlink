@@ -429,6 +429,7 @@ tCircBufError circbuf_writeMultipleData(tCircBufInstance* pInstance_p,
     OPLK_DCACHE_INVALIDATE(pHeader, sizeof(tCircBufHeader));
     if (fullBlockSize > pHeader->freeSize)
     {
+        printConsole("   Buffer is full");
         circbuf_unlock(pInstance_p);
         return kCircBufBufferFull;
     }
@@ -448,6 +449,7 @@ tCircBufError circbuf_writeMultipleData(tCircBufInstance* pInstance_p,
             pHeader->writeOffset = 0;
         else
             pHeader->writeOffset += fullBlockSize;
+        printConsole("   Buffer has free space");
     }
     else
     {
