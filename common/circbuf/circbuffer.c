@@ -526,6 +526,8 @@ tCircBufError circbuf_readData(tCircBufInstance* pInstance_p, void* pData_p,
     tCircBufHeader*     pHeader;
     UINT8*              pCircBuf;
 
+    printConsole("Circbuffer.c - ReadData");
+
     // Check parameter validity
     ASSERT(pInstance_p != NULL);
     ASSERT(pDataBlockSize_p != NULL);

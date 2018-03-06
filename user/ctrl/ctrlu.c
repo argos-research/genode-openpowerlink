@@ -2049,6 +2049,7 @@ static tOplkError cbNodeEvent(UINT nodeId_p,
                               UINT16 errorCode_p,
                               BOOL fMandatory_p)
 {
+    printConsole("cbNodeEvent");
     tOplkError          ret = kErrorOk;
     tOplkApiEventArg    eventArg;
 
