@@ -494,7 +494,7 @@ tCircBufError circbuf_writeMultipleData(tCircBufInstance* pInstance_p,
     circbuf_unlock(pInstance_p);
     if (pInstance_p->pfnSigCb != NULL)
     {
-	printConsole("   pInstance_p->pfnSigCb not set!");
+	   printConsole("   pInstance_p->pfnSigCb set!");
         pInstance_p->pfnSigCb();
     }
     return kCircBufOk;
