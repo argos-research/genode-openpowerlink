@@ -49,6 +49,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kernel/eventk.h>
 #include <common/target.h>
 
+#include <genode_functions>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -117,6 +119,7 @@ The function initializes the kernel event CAL module on Linux.
 //------------------------------------------------------------------------------
 tOplkError eventkcal_init(void)
 {
+    printConsole("Eventkcal init");
     OPLK_MEMSET(&instance_l, 0, sizeof(tEventkCalInstance));
 
     if (eventkcal_initQueueCircbuf(kEventQueueK2U) != kErrorOk)
@@ -217,6 +220,7 @@ This function posts a event to the user queue.
 //------------------------------------------------------------------------------
 tOplkError eventkcal_postUserEvent(const tEvent* pEvent_p)
 {
+    printConsole("eventkcal_postUserEvent");
     tOplkError  ret;
 
     // Check parameter validity
@@ -238,6 +242,7 @@ This function will be called by the systems process function.
 //------------------------------------------------------------------------------
 void eventkcal_process(void)
 {
+    printConsole("eventkcal_process");
     if (instance_l.fInitialized == FALSE)
         return;
 
