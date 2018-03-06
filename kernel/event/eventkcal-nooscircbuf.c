@@ -49,7 +49,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <kernel/eventk.h>
 #include <common/target.h>
 
-#include <genode_functions>
+#include <genode_functions.h>
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
