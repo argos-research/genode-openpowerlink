@@ -775,6 +775,7 @@ tOplkError ctrlu_callUserEventCallback(tOplkApiEventType eventType_p,
 {
     tOplkError  ret = kErrorOk;
 
+    printConsole("== Got Event at ctrlu_callUserEventCallback ==");
     // If the stack is not initialized but we get events, we don't forward
     // them to the application!
     if (ctrlInstance_l.fInitialized)
