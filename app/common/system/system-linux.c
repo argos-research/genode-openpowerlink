@@ -109,8 +109,6 @@ static tFwmThreadInstance   fwmThreadInstance_l;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-static void handleTermSignal(int signum);
-
 #if defined(CONFIG_USE_SYNCTHREAD)
 static void* powerlinkSyncThread(void* arg);
 #endif
@@ -330,33 +328,6 @@ void system_stopFirmwareManagerThread(void)
 //============================================================================//
 /// \name Private Functions
 /// \{
-
-//------------------------------------------------------------------------------
-/**
-\brief  Handle termination requests
-
-This functions can be used to react on signals with termination semantics,
-and remembers in a flag that the user or the system asked the program to shut down.
-The application can than check this flag.
-
-\param[in]      signum              Received signal.
-
-*/
-//------------------------------------------------------------------------------
-static void handleTermSignal(int signum)
-{
-    switch (signum)
-    {
-        case SIGINT:    // Signals with termination semantics
-        case SIGTERM:   // trigger a flag change
-        case SIGQUIT:
-            fTermSignalReceived_l = TRUE;
-            break;
-
-        default:        // All other signals are ignored by this handler
-            break;
-    }
-}
 
 #if defined(CONFIG_USE_SYNCTHREAD)
 //------------------------------------------------------------------------------
