@@ -94,8 +94,6 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 	    	static void	process_input(tEdrvInstance *init)
 		{
-			tEdrvReleaseRxBuffer    retReleaseRxBuffer;
-			
 			tEdrvRxBuffer           rxBuffer;
 
 			Nic_receiver_thread   *th         = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
