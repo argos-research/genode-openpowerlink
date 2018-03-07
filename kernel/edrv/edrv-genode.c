@@ -147,8 +147,6 @@ This function sets a multicast entry into the Ethernet controller.
 //------------------------------------------------------------------------------
 tOplkError edrv_setRxMulticastMacAddr(const UINT8* pMacAddr_p)
 {
-    printConsole(pMacAddr_p);
-
     UNUSED_PARAMETER(pMacAddr_p);
 
     return kErrorOk;

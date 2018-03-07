@@ -224,7 +224,6 @@ This function posts an event to the provided queue instance.
 tOplkError eventkcal_postEventCircbuf(tEventQueue eventQueue_p,
                                       const tEvent* pEvent_p)
 {
-    printConsole("  eventkcal_postEventCircbuf");
     tOplkError      ret = kErrorOk;
     tCircBufError   circError;
 
@@ -245,12 +244,10 @@ tOplkError eventkcal_postEventCircbuf(tEventQueue eventQueue_p,
 
     if (pEvent_p->eventArgSize == 0)
     {
-        printConsole("  Event has arguments");
         circError = circbuf_writeData(instance_l[eventQueue_p], pEvent_p, sizeof(tEvent));
     }
     else
     {
-        printConsole("  Event has arguments");
         circError = circbuf_writeMultipleData(instance_l[eventQueue_p],
                                               pEvent_p,
                                               sizeof(tEvent),

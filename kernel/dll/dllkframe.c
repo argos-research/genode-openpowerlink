@@ -196,21 +196,13 @@ tEdrvReleaseRxBuffer dllkframe_processFrameReceived(tEdrvRxBuffer* pRxBuffer_p)
 
     BENCHMARK_MOD_02_SET(3);
     nmtState = dllkInstance_g.nmtState;
-    if (nmtState == kNmtGsOff)
-        printConsole("1");
-    if (nmtState == kNmtGsInitialising)
-        printConsole("2");
-    if (nmtState == kNmtGsResetApplication)
-        printConsole("3");
-    if (nmtState == kNmtGsResetCommunication)
-printConsole("Called Handler");
+
     if (nmtState <= kNmtGsResetConfiguration)
         goto Exit;
-printConsole("Called Handler2");
 
     pFrame = (tPlkFrame*)pRxBuffer_p->pBuffer;
 #if (CONFIG_EDRV_EARLY_RX_INT != FALSE)
-printConsole("Called Handler3a");
+
     switch (pRxBuffer_p->bufferInFrame)
     {
         case kEdrvBufferFirstInFrame:
@@ -265,7 +257,6 @@ printConsole("Called Handler3a");
 
     frameInfo.frame.pBuffer = pFrame;
     frameInfo.frameSize = pRxBuffer_p->rxFrameSize;
-printConsole("Called Handler 3b");
 
     if (ami_getUint16Be(&pFrame->etherType) != C_DLL_ETHERTYPE_EPL)
     {   // non-POWERLINK frame

@@ -307,7 +307,6 @@ tCircBufError circbuf_writeData(tCircBufInstance* pInstance_p,
                                 const void* pData_p,
                                 size_t size_p)
 {
-    printConsole("->Write to Circbuffer");
     UINT32              blockSize;
     UINT32              fullBlockSize;
     UINT32              chunkSize;
@@ -429,7 +428,6 @@ tCircBufError circbuf_writeMultipleData(tCircBufInstance* pInstance_p,
     OPLK_DCACHE_INVALIDATE(pHeader, sizeof(tCircBufHeader));
     if (fullBlockSize > pHeader->freeSize)
     {
-        printConsole("   Buffer is full");
         circbuf_unlock(pInstance_p);
         return kCircBufBufferFull;
     }
@@ -449,7 +447,6 @@ tCircBufError circbuf_writeMultipleData(tCircBufInstance* pInstance_p,
             pHeader->writeOffset = 0;
         else
             pHeader->writeOffset += fullBlockSize;
-        printConsole("   Buffer has free space");
     }
     else
     {
@@ -494,7 +491,6 @@ tCircBufError circbuf_writeMultipleData(tCircBufInstance* pInstance_p,
     circbuf_unlock(pInstance_p);
     if (pInstance_p->pfnSigCb != NULL)
     {
-	   printConsole("   pInstance_p->pfnSigCb set!");
         pInstance_p->pfnSigCb();
     }
     return kCircBufOk;
@@ -525,8 +521,6 @@ tCircBufError circbuf_readData(tCircBufInstance* pInstance_p, void* pData_p,
     UINT32              chunkSize;
     tCircBufHeader*     pHeader;
     UINT8*              pCircBuf;
-
-    printConsole("Circbuffer.c - ReadData");
 
     // Check parameter validity
     ASSERT(pInstance_p != NULL);

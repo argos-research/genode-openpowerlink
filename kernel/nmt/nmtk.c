@@ -290,15 +290,6 @@ tOplkError nmtk_process(const tEvent* pEvent_p)
                              __func__,
                              nmtEvent,
                              nmtkStates_l[nmtkInstance_l.stateIndex].nmtState);
-    if (nmtkStates_l[nmtkInstance_l.stateIndex].nmtState == kNmtGsOff)
-        printConsole("11");
-    if (nmtkStates_l[nmtkInstance_l.stateIndex].nmtState == kNmtGsInitialising)
-        printConsole("22");
-    if (nmtkStates_l[nmtkInstance_l.stateIndex].nmtState == kNmtGsResetApplication)
-        printConsole("33");
-    if (nmtkStates_l[nmtkInstance_l.stateIndex].nmtState == kNmtGsResetCommunication)
-printConsole("44");
-
 
         nmtStateChange.newNmtState = nmtkStates_l[nmtkInstance_l.stateIndex].nmtState;
         nmtStateChange.oldNmtState = nmtkStates_l[oldState].nmtState;
