@@ -76,6 +76,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 	                end = TRUE;
 	            } catch(Nic::Session::Tx::Source::Packet_alloc_failed) {
 	                /* packet allocator exhausted, wait for acknowledgements */
+	                Genode::log("Too many packets");
 	                _tx_ack(true);
 	            }
 	        }
