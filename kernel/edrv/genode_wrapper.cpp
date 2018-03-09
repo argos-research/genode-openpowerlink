@@ -66,6 +66,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 		void sendTXBufferWorkerThread(unsigned char* buffer, size_t size) {
 			Genode::log("NIC Thread sendTXBufferWorkerThread()");
+			Genode::log(buffer);
 	  		Nic::Packet_descriptor packet;
 	  		bool end = FALSE;
 
@@ -167,7 +168,6 @@ extern "C" {
 
 
   	void sendTXBuffer(tEdrvInstance *init, unsigned char* buffer, size_t size) {
-  		Genode::log("NIC sendTXBuffer()");
   		Nic_receiver_thread *th = reinterpret_cast<Nic_receiver_thread*>(init->genodeEthThread);
 
 		th->sendTXBufferWorkerThread(buffer, size);
