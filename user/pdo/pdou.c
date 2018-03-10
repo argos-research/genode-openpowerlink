@@ -1160,6 +1160,7 @@ static tOplkError checkAndConfigurePdo(UINT16 mappParamIndex_p,
     ret = obdu_readEntry(commParamIndex, 0x01, &nodeId, &obdSize);
     if (ret != kErrorOk)
     {   // fatal error occurred
+printConsole("------------------------------------------------------");
         goto Exit;
     }
     pdoChannelConf.pdoChannel.nodeId = nodeId;
