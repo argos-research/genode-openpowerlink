@@ -1253,8 +1253,11 @@ static tOplkError checkAndConfigurePdo(UINT16 mappParamIndex_p,
                               mappParamIndex_p,
                               mappObjectCount_p,
                               pdoChannelConf.fTx);
-        if (ret != kErrorOk)
+printConsole("!!!!!!!!!!!!!!");
+        if (ret != kErrorOk) {
+printConsole("§§§§§§§§§§§§§§");
             *pAbortCode_p = SDO_AC_DATA_NOT_TRANSF_DUE_LOCAL_CONTROL;
+	}
     }
 
 Exit:
