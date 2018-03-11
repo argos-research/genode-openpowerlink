@@ -939,7 +939,7 @@ static tOplkError allocatePdoChannels(const tPdoAllocationParam* pAllocationPara
     }
 
 Exit:
-if(ret)
+if(ret==kErrorOk)
 printConsole(":::::::::OK");
 else
 printConsole("::::::::NOT OK");
