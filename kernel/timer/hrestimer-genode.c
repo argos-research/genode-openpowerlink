@@ -61,7 +61,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#undef  HIGH_RESK_TIMER_LATENCY_DEBUG       ///< enable/disable latency debugging
+#define  HIGH_RESK_TIMER_LATENCY_DEBUG       ///< enable/disable latency debugging
 
 #define TIMER_COUNT             2           ///< number of high-resolution timers
 #define TIMER_MIN_VAL_SINGLE    20000       ///< minimum timer interval for single timeouts
@@ -109,11 +109,11 @@ typedef struct
     sem_t               syncSem;            ///< Thread synchronization semaphore
     BOOL                fTerminate;         ///< Thread termination flag
     BOOL                fContinue;          ///< Flag determines if timer will be restarted continuously
-//#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
-//    /* additional variables for latency debugging */
-//    LONG                maxLatency;         ///< Minimum measured timer latency
-//    LONG                minLatency;         ///< Maximum measured timer latency
-//#endif
+#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
+    /* additional variables for latency debugging */
+    LONG                maxLatency;         ///< Minimum measured timer latency
+    LONG                minLatency;         ///< Maximum measured timer latency
+#endif
 } tHresTimerInfo;
 
 /**
@@ -139,11 +139,11 @@ static inline void timespec_add(const struct timespec* time1_p,
                                 ULONGLONG offset_p,
                                 struct timespec* result_p);
 
-//#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
-//static inline void timespec_sub(const struct timespec* time1_p,
-//                                const struct timespec* time2_p,
-//                                struct timespec* result_p)
-//#endif
+#ifdef HIGH_RESK_TIMER_LATENCY_DEBUG
+static inline void timespec_sub(const struct timespec* time1_p,
+                                const struct timespec* time2_p,
+                                struct timespec* result_p)
+#endif
 
 
 //============================================================================//
@@ -343,8 +343,9 @@ tOplkError hrestimer_modifyTimer(tTimerHdl* pTimerHdl_p,
     pTimerInfo->pfnCallback = pfnCallback_p;
     pTimerInfo->fContinue   = fContinue_p;
     pTimerInfo->time        = time_p;
-
+DEBUG_LVL_TIMERH_TRACE("Before clock");
     clock_gettime(CLOCK_MONOTONIC, &pTimerInfo->startTime);  // get current time
+DEBUG_LVL_TIMERH_TRACE("After clock");
     sem_post(&pTimerInfo->syncSem); /* signal timer start to thread */
 
     return ret;
