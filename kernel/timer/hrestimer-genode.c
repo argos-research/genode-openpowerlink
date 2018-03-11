@@ -469,7 +469,7 @@ static void* timerThread(void* pArgument_p)
     struct timespec     debugtime, curTime;
 #endif
 
-    DEBUG_LVL_TIMERH_TRACE("%s(): ThreadId:%ld\n", __func__, syscall(SYS_gettid));
+    //DEBUG_LVL_TIMERH_TRACE("%s(): ThreadId:%ld\n", __func__, syscall(SYS_gettid));
     DEBUG_LVL_TIMERH_TRACE("%s(): timer:%lx\n", __func__, (unsigned long)pArgument_p);
 
     /* thread parameter contains the address of the timer information structure */
