@@ -2403,37 +2403,44 @@ UINT32 getRequiredKernelFeatures(void)
 #if defined(CONFIG_INCLUDE_NMT_MN)
     // We do have NMT functionality compiled in and therefore need an MN
     // kernel stack
+printConsole("*** CONFIG_INCLUDE_NMT_MN");
     requiredKernelFeatures |= OPLK_KERNEL_MN;
 #endif
 
 #if defined(CONFIG_INCLUDE_PDO)
     // We contain the PDO module for isochronous transfers and therefore need
     // a kernel module which can handle isochronous transfers.
+printConsole("*** CONFIG_INCLUDE_PDO");
     requiredKernelFeatures |= OPLK_KERNEL_ISOCHR;
 #endif
 
 #if defined(CONFIG_INCLUDE_PRES_FORWARD)
     // We contain the PRES forwarding module (used for diagnosis) and therefore
     // need a kernel with this feature.
+printConsole("*** CONFIG_INCLUDE_PRES_FORWARD");
     requiredKernelFeatures |= OPLK_KERNEL_PRES_FORWARD;
 #endif
 
 #if defined(CONFIG_INCLUDE_VETH)
     // We contain the virtual Ethernet module and therefore need a kernel
     // which supports virtual Ethernet.
+printConsole("*** CONFIG_INCLUDE_VETH");
     requiredKernelFeatures |= OPLK_KERNEL_VETH;
 #endif
 
 #if defined(CONFIG_INCLUDE_NMT_RMN)
     // We contain the code for the redundancy MN (RMN)
+printConsole("*** CONFIG_INCLUDE_NMT_RMN");
     requiredKernelFeatures |= OPLK_KERNEL_RMN;
 #endif
 
 #if (CONFIG_DLL_PRES_CHAINING_CN == TRUE)
+printConsole("*** CONFIG_DLL_PRES_CHAINING_CN");
     requiredKernelFeatures |= OPLK_KERNEL_PRES_CHAINING_CN;
 #endif
 
 #if defined(CONFIG_INCLUDE_SOC_TIME_FORWARD)
+printConsole("*** CONFIG_INCLUDE_SOC_TIME_FORWARD");
     requiredKernelFeatures |= OPLK_KERNEL_SOC_TIME_FORWARD;
 #endif
 
