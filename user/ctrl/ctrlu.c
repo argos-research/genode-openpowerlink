@@ -694,8 +694,8 @@ BOOL ctrlu_checkKernelStack(void)
     UINT32          diff;
 
     // don't exceed kernel heartbeat frequency
-//    timestamp = target_getTickCount();
-timestamp = 0;
+    timestamp = target_getTickCount();
+
     if (timestamp >= lastTimestamp)
         diff = timestamp - lastTimestamp;
     else
