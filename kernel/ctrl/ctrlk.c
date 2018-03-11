@@ -506,11 +506,11 @@ static tOplkError initStack(void)
     if (ret != kErrorOk)
         return ret;
 
-//#if defined(CONFIG_INCLUDE_PDO)
+#if defined(CONFIG_INCLUDE_PDO)
     ret = pdok_init();
     if (ret != kErrorOk)
         return ret;
-//#endif
+#endif
 
 #if defined(CONFIG_INCLUDE_LEDK)
     ret = ledk_init();

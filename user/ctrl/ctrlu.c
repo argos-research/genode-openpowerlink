@@ -303,6 +303,12 @@ tOplkError ctrlu_checkKernelStackInfo(void)
     if ((ctrlInstance_l.usableKernelFeatures == ctrlInstance_l.requiredKernelFeatures) &&
         (ctrlInstance_l.kernelInfo.version == PLK_DEFINED_STACK_VERSION))
     {
+
+char snum[35];
+
+// convert 123 to string [buf]
+itoa(ctrlInstance_l.requiredKernelFeatures, snum, 10);
+printConsole(snum);
         DEBUG_LVL_ALWAYS_TRACE("Kernel features: 0x%08x\n", ctrlInstance_l.kernelInfo.featureFlags);
         DEBUG_LVL_ALWAYS_TRACE("Usable features: 0x%08x\n", ctrlInstance_l.usableKernelFeatures);
         DEBUG_LVL_ALWAYS_TRACE("Kernel version: 0x%08x\n", ctrlInstance_l.kernelInfo.version);
