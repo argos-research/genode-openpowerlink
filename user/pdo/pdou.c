@@ -1160,7 +1160,6 @@ static tOplkError checkAndConfigurePdo(UINT16 mappParamIndex_p,
     ret = obdu_readEntry(commParamIndex, 0x01, &nodeId, &obdSize);
     if (ret != kErrorOk)
     {   // fatal error occurred
-printConsole("------------------------------------------------------");
         goto Exit;
     }
     pdoChannelConf.pdoChannel.nodeId = nodeId;
@@ -1182,11 +1181,8 @@ printConsole("------------------------------------------------------");
                                   mappObjectCount_p,
                                   pdoChannelConf.fTx);
 
-printConsole("????????????????????????????????????????");
-
             if (ret != kErrorOk)
                  *pAbortCode_p = SDO_AC_DATA_NOT_TRANSF_DUE_LOCAL_CONTROL;
-printConsole("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
         goto Exit;
     }
