@@ -61,7 +61,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define  HIGH_RESK_TIMER_LATENCY_DEBUG       ///< enable/disable latency debugging
+#undef  HIGH_RESK_TIMER_LATENCY_DEBUG       ///< enable/disable latency debugging
 
 #define TIMER_COUNT             2           ///< number of high-resolution timers
 #define TIMER_MIN_VAL_SINGLE    20000       ///< minimum timer interval for single timeouts
