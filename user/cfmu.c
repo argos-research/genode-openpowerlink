@@ -331,6 +331,7 @@ tOplkError cfmu_processNodeEvent(UINT nodeId_p,
             // Set node CFM state to an intermediate state to catch the SDO callback
             pNodeInfo->cfmState = kCfmStateInternalAbort;
 
+	    DEBUG_LVL_CFM_TRACE("SDO_AC_DATA_NOT_TRANSF_DUE_LOCAL_CONTROL heeeeeere\n");
             ret = sdocom_abortTransfer(pNodeInfo->sdoComConHdl, SDO_AC_DATA_NOT_TRANSF_DUE_LOCAL_CONTROL);
             if (ret != kErrorOk)
                 return ret;
