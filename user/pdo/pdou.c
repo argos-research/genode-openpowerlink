@@ -939,6 +939,10 @@ static tOplkError allocatePdoChannels(const tPdoAllocationParam* pAllocationPara
     }
 
 Exit:
+if(ret)
+printConsole(":::::::::OK");
+else
+printConsole("::::::::NOT OK");
     DEBUG_LVL_PDO_TRACE("%s() = %s\n", __func__, debugstr_getRetValStr(ret));
     return ret;
 }
