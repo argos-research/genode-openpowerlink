@@ -2509,6 +2509,7 @@ static tOplkError storeOdPart(tObdCbParam* pParam_p)
             // Device does not support saving parameters or not by command
             if ((devCap & OBD_STORE_AUTONOMOUSLY) != 0)
             {
+printConsole("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrorr!");
                 // Device saves parameters autonomously.
                 pParam_p->abortCode = SDO_AC_DATA_NOT_TRANSF_DUE_LOCAL_CONTROL;
             }
