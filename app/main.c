@@ -91,7 +91,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 typedef struct
 {
     UINT32          nodeId;
-    tEventlogFormat logFormat;
     UINT32          logLevel;
     UINT32          logCategory;
     char            devName[128];
