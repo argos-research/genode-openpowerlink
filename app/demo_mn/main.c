@@ -166,11 +166,6 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    eventlog_init(opts.logFormat,
-                  opts.logLevel,
-                  opts.logCategory,
-                  (tEventlogOutputCb)console_printlogadd);
-
     memset(&eventConfig, 0, sizeof(tEventConfig));
 
     eventConfig.pfGsOff = &fGsOff_l;
@@ -180,7 +175,7 @@ int main(int argc, char* argv[])
 
     printConsole("----------------------------------------------------\n");
     printConsole("openPOWERLINK console MN DEMO application\n");
-    printConsole("Using openPOWERLINK stack: %s\n", oplk_getVersionString());
+    printConsole("Using openPOWERLINK stack: %s\n");
     printConsole("----------------------------------------------------\n");
 
     ret = initPowerlink(CYCLE_LEN,
