@@ -11,7 +11,7 @@
 #include "event.h"
 #include "app.h"
 
-#define CYCLE_LEN           500000
+#define CYCLE_LEN           150000
 #define NODEID              1
 #define IP_ADDR             0xc0a86401          // 192.168.100.1
 #define DEFAULT_GATEWAY     0xC0A864FE          // 192.168.100.C_ADR_RT1_DEF_NODE_ID
@@ -81,7 +81,7 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     initParam.cycleLen                = cycleLen_p;             // required for error detection
     initParam.isochrTxMaxPayload      = C_DLL_ISOCHR_MAX_PAYL;  // const
     initParam.isochrRxMaxPayload      = C_DLL_ISOCHR_MAX_PAYL;  // const
-    initParam.presMaxLatency          = 5000000;                  // const; only required for IdentRes
+    initParam.presMaxLatency          = 50000000;                  // const; only required for IdentRes
     initParam.preqActPayloadLimit     = 36;                     // required for initialization (+28 bytes)
     initParam.presActPayloadLimit     = 36;                     // required for initialization of Pres frame (+28 bytes)
     initParam.asndMaxLatency          = 15000000;                 // const; only required for IdentRes
