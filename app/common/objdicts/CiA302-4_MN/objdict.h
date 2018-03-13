@@ -36,6 +36,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ------------------------------------------------------------------------------*/
 
+#define CONFIG_DLL_PRES_FILTER_COUNT                    -1 
+
 #define OBD_DEFINE_MACRO
     #include <obdcreate/obdmacro.h>
 #undef OBD_DEFINE_MACRO
