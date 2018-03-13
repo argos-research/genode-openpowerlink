@@ -430,7 +430,6 @@ static int getOptions(int argc_p,
     /* setup default parameters */
     strncpy(pOpts_p->devName, "\0", 128);
     pOpts_p->nodeId = NODEID;
-    pOpts_p->logFormat = kEventlogFormatReadable;
     pOpts_p->logCategory = 0xffffffff;
     pOpts_p->logLevel = 0xffffffff;
 
