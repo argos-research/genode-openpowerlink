@@ -499,7 +499,7 @@ printConsole("Initializing kernel modules ...\n");
 
     // linkDomainObjects requires an initialized stack
 #if defined(CONFIG_INCLUDE_NMT_MN)
-    printConsole("Initialize linkDomainObjects)";
+    printConsole("Initialize linkDomainObjects");
     ret = linkDomainObjects(aLinkObjectRequestsMn_l, tabentries(aLinkObjectRequestsMn_l));
 #endif
 
