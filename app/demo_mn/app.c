@@ -50,7 +50,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <obdpi.h>
 
-#include "genode_functions.h"
+#include <genode_functions.h>
 
 #include "xap.h"
 

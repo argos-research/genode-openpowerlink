@@ -53,7 +53,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <firmwaremanager/firmwaremanager.h>
 
 
-#include "genode_functions.h"
+#include <genode_functions.h>
 
 #include <stdio.h>
 #include <limits.h>

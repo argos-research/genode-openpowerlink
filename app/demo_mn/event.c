@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <oplk/oplk.h>
 #include <oplk/debugstr.h>
 
-#include "genode_functions.h"
+#include <genode_functions.h>
 
 #include <stdio.h>
 
