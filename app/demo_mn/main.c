@@ -155,14 +155,14 @@ int main(int argc, char* argv[])
 
     if (system_init() != 0)
     {
-        printConsole(stderr, "Error initializing system!");
+        printConsole("Error initializing system!");
         return 0;
     }
 
     fwRet = firmwaremanager_init(opts.fwInfoFile);
     if (fwRet != kFwReturnOk)
     {
-        printConsole(stderr, "Error initializing firmware manager!");
+        printConsole("Error initializing firmware manager!");
         return 0;
     }
 
