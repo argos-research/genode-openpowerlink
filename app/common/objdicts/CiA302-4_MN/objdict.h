@@ -36,7 +36,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ------------------------------------------------------------------------------*/
 
-#define CONFIG_DLL_PRES_FILTER_COUNT                    -1 
 
 #define OBD_DEFINE_MACRO
     #include <obdcreate/obdmacro.h>
@@ -1005,9 +1004,16 @@ OBD_BEGIN()
             OBD_SUBINDEX_RAM_VAR(0x1C14, 0x00, kObdTypeUInt32, kObdAccSRW, tObdUnsigned32, LossOfSocTolerance, 100000)
         OBD_END_INDEX(0x1C14)
 
+#ifndef NMT_MAX_NODE_ID
+#if (defined(CONFIG_INCLUDE_NMT_MN) || (CONFIG_DLL_PRES_FILTER_COUNT != 0))
+#define NMT_MAX_NODE_ID                                 254                 // maximum node-ID with MN or cross-traffic support
+#else /* (defined(CONFIG_INCLUDE_NMT_MN) || (CONFIG_DLL_PRES_FILTER_COUNT != 0)) */
+#define NMT_MAX_NODE_ID                                 0                   // maximum node-ID with MN or cross-traffic support
+#endif /* (defined(CONFIG_INCLUDE_NMT_MN) || (CONFIG_DLL_PRES_FILTER_COUNT != 0)) */
+#endif /* NMT_MAX_NODE_ID */
+
         // Object 1C16h: DLL_MNLossStatusResThrCnt_AU32
         OBD_RAM_INDEX_RAM_ARRAY(0x1C16, NMT_MAX_NODE_ID, FALSE, kObdTypeUInt32, kObdAccR, tObdUnsigned32, DLL_MNLossStatusResThrCnt_AU32, 0)
-
         // Object 1C17h: DLL_MNLossStatusResThreshold_AU32
         OBD_RAM_INDEX_RAM_ARRAY(0x1C17, NMT_MAX_NODE_ID, FALSE, kObdTypeUInt32, kObdAccSRW, tObdUnsigned32, DLL_MNLossStatusResThreshold_AU32, 15)
 
