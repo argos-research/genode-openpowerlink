@@ -11,7 +11,7 @@
 #include "event.h"
 #include "app.h"
 
-#define CYCLE_LEN           1000000
+#define CYCLE_LEN           500000
 #define NODEID              1
 #define IP_ADDR             0xc0a86401          // 192.168.100.1
 #define DEFAULT_GATEWAY     0xC0A864FE          // 192.168.100.C_ADR_RT1_DEF_NODE_ID
@@ -81,17 +81,17 @@ static tOplkError initPowerlink(UINT32 cycleLen_p,
     initParam.cycleLen                = cycleLen_p;             // required for error detection
     initParam.isochrTxMaxPayload      = C_DLL_ISOCHR_MAX_PAYL;  // const
     initParam.isochrRxMaxPayload      = C_DLL_ISOCHR_MAX_PAYL;  // const
-    initParam.presMaxLatency          = 50000;                  // const; only required for IdentRes
+    initParam.presMaxLatency          = 5000000;                  // const; only required for IdentRes
     initParam.preqActPayloadLimit     = 36;                     // required for initialization (+28 bytes)
     initParam.presActPayloadLimit     = 36;                     // required for initialization of Pres frame (+28 bytes)
-    initParam.asndMaxLatency          = 150000;                 // const; only required for IdentRes
+    initParam.asndMaxLatency          = 15000000;                 // const; only required for IdentRes
     initParam.multiplCylceCnt         = 0;                      // required for error detection
     initParam.asyncMtu                = 1500;                   // required to set up max frame size
     initParam.prescaler               = 2;                      // required for sync
     initParam.lossOfFrameTolerance    = 5000000;
     initParam.lossOfFrameTolerance    = 500000;
 //    initParam.asyncSlotTimeout        = 3000000;
-    initParam.waitSocPreq             = 1000;
+    initParam.waitSocPreq             = 10000;
     initParam.deviceType              = UINT_MAX;               // NMT_DeviceType_U32
     initParam.vendorId                = UINT_MAX;               // NMT_IdentityObject_REC.VendorId_U32
     initParam.productCode             = UINT_MAX;               // NMT_IdentityObject_REC.ProductCode_U32
