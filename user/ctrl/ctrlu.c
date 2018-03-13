@@ -486,8 +486,10 @@ printConsole("Initializing kernel modules ...\n");
 #if defined(CONFIG_INCLUDE_CFM)
     DEBUG_LVL_CTRL_TRACE("Initialize cfm module...\n");
     ret = cfmu_init(cbCfmEventCnProgress, cbCfmEventCnResult);
-    if (ret != kErrorOk)
+    if (ret != kErrorOk) {
+        printConsole("Error Initialize cfm module");
         goto Exit;
+    }
 #endif
 
     // the application must start NMT state machine
@@ -497,6 +499,7 @@ printConsole("Initializing kernel modules ...\n");
 
     // linkDomainObjects requires an initialized stack
 #if defined(CONFIG_INCLUDE_NMT_MN)
+    printConsole("Initialize linkDomainObjects)";
     ret = linkDomainObjects(aLinkObjectRequestsMn_l, tabentries(aLinkObjectRequestsMn_l));
 #endif
 
