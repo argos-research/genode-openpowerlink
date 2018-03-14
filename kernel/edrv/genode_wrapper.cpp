@@ -69,7 +69,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 			int i = 0;
 			char out[((int)size)+1]; //null terminator
 			for (i = 0; i < ((int)size)/3; i++) {
-			    snprintf(out+i*3, 4, "%02x ", buffer[i])
+			    snprintf(out+i*3, 4, "%02x ", buffer[i]);
 			}
 			Genode::log((const char *)out);
 	  		Nic::Packet_descriptor packet;
