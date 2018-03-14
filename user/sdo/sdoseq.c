@@ -1673,6 +1673,7 @@ static tOplkError processState(UINT handle_p,
     {
         // idle state
         case kSdoSeqStateIdle:
+            DEBUG_LVL_SDO_TRACE("State kSdoSeqStateIdle");
             ret = processStateIdle(pSdoSeqCon,
                                    sdoSeqConHdl,
                                    event_p,
@@ -1681,6 +1682,7 @@ static tOplkError processState(UINT handle_p,
 
         // init connection step 1 - wait for frame with scon = 1 and rcon = 1
         case kSdoSeqStateInit1:
+            DEBUG_LVL_SDO_TRACE("State kSdoSeqStateInit1");
             ret = processStateInit1(pSdoSeqCon,
                                     sdoSeqConHdl,
                                     event_p,
@@ -1689,6 +1691,7 @@ static tOplkError processState(UINT handle_p,
 
         // init connection step 2
         case kSdoSeqStateInit2:
+            DEBUG_LVL_SDO_TRACE("State kSdoSeqStateInit2");
             ret = processStateInit2(pSdoSeqCon,
                                     sdoSeqConHdl,
                                     event_p,
@@ -1697,6 +1700,7 @@ static tOplkError processState(UINT handle_p,
 
         // init connection step 3
         case kSdoSeqStateInit3:
+            DEBUG_LVL_SDO_TRACE("State kSdoSeqStateInit3");
             ret = processStateInit3(pSdoSeqCon,
                                     sdoSeqConHdl,
                                     event_p,
@@ -1705,6 +1709,7 @@ static tOplkError processState(UINT handle_p,
 
         // connection established
         case kSdoSeqStateConnected:
+            DEBUG_LVL_SDO_TRACE("State kSdoSeqStateConnected");
             ret = processStateConnected(pSdoSeqCon,
                                         sdoSeqConHdl,
                                         event_p,
@@ -1715,6 +1720,7 @@ static tOplkError processState(UINT handle_p,
 
         // wait for acknowledge (history buffer full)
         case kSdoSeqStateWaitAck:
+	    DEBUG_LVL_SDO_TRACE("State kSdoSeqStateWaitAck");
             ret = processStateWaitAck(pSdoSeqCon,
                                       sdoSeqConHdl,
                                       event_p,
@@ -1909,8 +1915,8 @@ static tOplkError receiveCb(tSdoConHdl conHdl_p,
 #endif
 
         DEBUG_LVL_SDO_TRACE("Handle: 0x%x , First data Byte 0x%x\n",
-                            conHdl_p,
-                            ((const UINT8*)pSdoSeqData_p)[0]);
+                            conHdl_p);
+        DEBUG_LVL_SDO_TRACE((const char*)((const UINT8*)pSdoSeqData_p)[0]);
 
         // search control structure for this connection
         pSdoSeqCon = &sdoSeqInstance_l.aSdoSeqCon[count];
@@ -1929,6 +1935,7 @@ static tOplkError receiveCb(tSdoConHdl conHdl_p,
         {   // new connection
             if (freeEntry == CONFIG_SDO_MAX_CONNECTION_SEQ)
             {
+		DEBUG_LVL_SDO_TRACE("kErrorSdoSeqNoFreeHandle");
                 ret = kErrorSdoSeqNoFreeHandle;
 #if (defined(WIN32) || defined(_WIN32))
                 LeaveCriticalSection(sdoSeqInstance_l.pCriticalSectionReceive);
