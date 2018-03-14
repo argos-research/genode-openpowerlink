@@ -43,6 +43,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <user/obdu.h>
 #include <user/obdal.h>
 
+#include <genode_functions.h>
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -177,7 +179,7 @@ tOplkError obdal_enableUserObdAccess(BOOL fEnable_p)
         // not initialized
         return kErrorNoResource;
     }
-
+printConsole("ACCESS");
     instance_l.fUserObdAccessEnabled = fEnable_p;
     return kErrorOk;
 }
@@ -201,7 +203,7 @@ tOplkError obdal_processSdoWrite(tSdoObdConHdl* pSdoHdl_p,
                                  tCmdLayerObdFinishedCb pfnFinishSdoCb_p)
 {
     tOplkError      ret = kErrorOk;
-
+printConsole("WRITE-SDO");
     if (pSdoHdl_p == NULL)
     {
         ret = kErrorApiInvalidParam;
@@ -258,7 +260,7 @@ tOplkError obdal_processSdoRead(tSdoObdConHdl* pSdoHdl_p,
                                 tCmdLayerObdFinishedCb pfnFinishSdoCb_p)
 {
     tOplkError      ret = kErrorOk;
-
+printConsole("READ-SDO");
     if (pSdoHdl_p == NULL)
     {
         ret = kErrorApiInvalidParam;
@@ -307,7 +309,7 @@ kErrorReject at the beginning of the access to signal a delayed answer.
 tOplkError obdal_finishUserObdAccess(tObdAlConHdl* pUserObdConHdl_p)
 {
     tOplkError      ret = kErrorOk;
-
+printConsole("FINISH-SDO");
     if (pUserObdConHdl_p == NULL)
     {
         ret = kErrorApiInvalidParam;
