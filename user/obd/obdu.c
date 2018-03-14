@@ -542,12 +542,11 @@ tOplkError obdu_defineVar(const tVarParam* pVarParam_p)
     ret = getEntry(pVarParam_p->index, pVarParam_p->subindex, NULL, &pSubIndexEntry);
     if (ret != kErrorOk)
         return ret;
-printConsole("getEntry successfull");
+
     // get var entry
     ret = getVarEntry(pSubIndexEntry, &pVarEntry);
     if (ret != kErrorOk)
         return ret;
-printConsole("getVarEntry successfull");
 
     varValid = pVarParam_p->validFlag;
 

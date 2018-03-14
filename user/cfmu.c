@@ -223,6 +223,7 @@ tOplkError cfmu_init(tCfmCbEventCnProgress pfnCbEventCnProgress_p,
             (ret != kErrorObdIndexNotExist) &&
             (ret != kErrorObdSubindexNotExist))
         {
+printConsole("cfmu ERROR");
             return ret;
         }
     }
