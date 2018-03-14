@@ -320,10 +320,10 @@ tOplkError eventu_postEvent(const tEvent* pEvent_p)
         case kEventSinkSdoTest:
         case kEventSinkDlluCal:
         case kEventSinkErru:
-            DEBUG_LVL_EVENTU_TRACE("UINT  type:%s(%d) sink:%s(%d) size:%d!\n",
-                                   debugstr_getEventTypeStr(pEvent_p->eventType),
-                                   pEvent_p->eventType,
-                                   debugstr_getEventSinkStr(pEvent_p->eventSink),
+            DEBUG_LVL_EVENTU_TRACE("UINT  type:%s(%d) sink:%s(%d) size:%d!\n");
+            DEBUG_LVL_EVENTU_TRACE(debugstr_getEventTypeStr(pEvent_p->eventType),
+                                   pEvent_p->eventType);
+            DEBUG_LVL_EVENTU_TRACE(debugstr_getEventSinkStr(pEvent_p->eventSink),
                                    pEvent_p->eventSink,
                                    pEvent_p->eventArgSize);
             ret = eventucal_postUserEvent(pEvent_p);
