@@ -1915,8 +1915,7 @@ static tOplkError receiveCb(tSdoConHdl conHdl_p,
 #endif
 
         DEBUG_LVL_SDO_TRACE("Handle: 0x%x , First data Byte 0x%x\n",
-                            conHdl_p);
-        DEBUG_LVL_SDO_TRACE((const char*)((const UINT8*)pSdoSeqData_p)[0]);
+                            conHdl_p, ((const UINT8*)pSdoSeqData_p)[0]);
 
         // search control structure for this connection
         pSdoSeqCon = &sdoSeqInstance_l.aSdoSeqCon[count];
