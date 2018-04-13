@@ -2,6 +2,12 @@
 
 #ifdef __cplusplus
 
+/* 
+* Implementation according to /lib/lwip/platform/nic.cc file written by:
+* Stefan Kalkowski (date: 2009-11-05)
+* as part of the LwIP ethernet interface for Genode (developed by Genode Labs GmbH)
+*/
+
 #include <base/thread.h>
 #include <base/log.h>
 #include <nic/packet_allocator.h>
@@ -9,8 +15,8 @@
 
 #define PACKET_SIZE 	1536;
 
-    /*
- * Thread, that receives packets by the nic-session interface.
+ /*
+ * Thread, that receives packets by nic-session
  */
 class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 {
@@ -20,7 +26,7 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 
 		Nic::Connection  *_nic;       /* nic-session */
 		Packet_descriptor _rx_packet; /* actual packet received */
-		tEdrvInstance *_init;
+		tEdrvInstance *_init;	      /* ethernet driver instance of openPowerlink */
 
 		Genode::Signal_receiver  _sig_rec;
 
@@ -65,7 +71,6 @@ class Nic_receiver_thread : public Genode::Thread_deprecated<8192>
 		Packet_descriptor rx_packet() { return _rx_packet; };
 
 		void sendTXBufferWorkerThread(unsigned char* buffer, size_t size) {
-			Genode::log("NIC Thread sendTXBufferWorkerThread()");
 			int i = 0;
 			char out[((int)size)+1]; //null terminator
 			for (i = 0; i < ((int)size)/3; i++) {
@@ -161,8 +166,6 @@ extern "C" {
   	}
 
   	void get_Mac_Address(UINT8 addr[6]) {
-	    Genode::log("Getting MAC Address");
-
     	//Get Mac Address from Genode NIC
     	Nic::Mac_address _mac_address = nic()->mac_address();
 

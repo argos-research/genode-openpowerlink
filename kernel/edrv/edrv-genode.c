@@ -35,7 +35,7 @@
 #define EDRV_MAX_FRAME_SIZE     1536//0x0600
 
 
-//############################################################################################using namespace Net;
+
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -102,15 +102,6 @@ This function shuts down the Ethernet driver.
 //------------------------------------------------------------------------------
 tOplkError edrv_exit(void)
 {
-    /*if (edrvDriver_l.name != NULL)
-    {
-        // clear buffer allocation
-        bufalloc_exit(pBufAlloc_l);
-        pBufAlloc_l = NULL;
-        // clear driver structure
-        OPLK_MEMSET(&edrvDriver_l, 0, sizeof(edrvDriver_l));
-    }*/
-
     return kErrorOk;
 }
 
@@ -127,8 +118,6 @@ This function returns the MAC address of the Ethernet controller
 //------------------------------------------------------------------------------
 const UINT8* edrv_getMacAddr(void)
 {
-    printConsole("Get MAC");
-    
     return edrvInstance_l.initParam.aMacAddr;
 }
 
@@ -299,7 +288,6 @@ tOplkError edrv_sendTxBuffer(tEdrvTxBuffer* pBuffer_p)
         pBuffer_p->txFrameSize = EDRV_MIN_ETH_SIZE;
     }
 
-    // #######################################SEND HERE#########################
     sendTXBuffer(&edrvInstance_l, pBuffer_p->pBuffer, pBuffer_p->txFrameSize);
 
 Exit:
